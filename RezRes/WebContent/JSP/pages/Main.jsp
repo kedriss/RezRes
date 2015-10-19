@@ -7,7 +7,7 @@
 <jsp:include page="/JSP/common/header.jsp"></jsp:include>
 
 <div id="body">
-${title}
+${body}
 </div>
 
 <jsp:include page="/JSP/common/footer.jsp"></jsp:include>

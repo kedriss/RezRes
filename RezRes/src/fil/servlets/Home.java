@@ -16,7 +16,8 @@ public class Home extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target = "/JSP/pages/Main.jsp";
-		
+		request.setAttribute("title", "Heyyyyyy");
+		request.setAttribute("body", "Hoooooo");
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
 		rd = context.getRequestDispatcher(target);
