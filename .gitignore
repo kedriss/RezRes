@@ -17,3 +17,9 @@ RezRes/.settings
 RezRes/builb/
 RezRes/target/
 
+Servers/
+RemoteSystemsTempFiles/
+.metadata
+.recommenders
+
+
