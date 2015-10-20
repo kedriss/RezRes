@@ -43,7 +43,7 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a role="button" class="btn btn-lg btn-primary btn-block" href="/RezRes/login">Login</a></li>
+				<li><p class="navbar-btn"><a role="button" class="btn btn-success" href="/RezRes/login">Login</a></p></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
