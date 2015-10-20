@@ -1,4 +1,4 @@
-package fil.servlets;
+package fil.servlets.admin;
 
 import java.io.IOException;
 
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/home")
-public class Home extends HttpServlet {
-	private static final long serialVersionUID = -594667926099562461L;
+@WebServlet("/admin/ressources")
+public class GestRessources extends HttpServlet {
+	private static final long serialVersionUID = -5112025367936813560L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target = "/JSP/pages/Main.jsp";
-		request.setAttribute("title", "RezRes");
-		request.setAttribute("body", "Bienvenue sur RezRes !");
+		request.setAttribute("title", "RezRes - Gestion des ressources");
+		request.setAttribute("body", "Gestion des ressources");
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
