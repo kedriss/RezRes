@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = -5270557174439766566L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target = "/JSP/pages/Main.jsp";
 		request.setAttribute("title", "RezRes - Login");
-		request.setAttribute("body", "Login");
+		request.setAttribute("body", "LOGIN");
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
@@ -25,7 +25,11 @@ public class LoginServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handleRequest(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		handleRequest(request, response);
 	}
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = -594667926099562461L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target = "/JSP/pages/Main.jsp";
 		request.setAttribute("title", "RezRes");
 		request.setAttribute("body", "Bienvenue sur RezRes !");
@@ -25,7 +25,11 @@ public class Home extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handleRequest(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		handleRequest(request, response);
 	}
 }

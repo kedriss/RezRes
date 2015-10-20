@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class GestTypeRessources extends HttpServlet {
 	private static final long serialVersionUID = -4391170416639320134L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/admin/gest_type.jsp";
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String target = "/JSP/pages/Main.jsp";
 		request.setAttribute("title", "RezRes - Gestion des types de ressources");
-		request.setAttribute("body", "Gestion des type de ressources");
+		request.setAttribute("body", "Gestion des types de ressources");
 		request.setAttribute("menu_entry", 3);
 		
 		RequestDispatcher rd;
@@ -26,7 +26,11 @@ public class GestTypeRessources extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handleRequest(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		handleRequest(request, response);
 	}
 }

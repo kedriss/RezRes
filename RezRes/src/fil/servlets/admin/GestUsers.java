@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GestUsers extends HttpServlet {
 	private static final long serialVersionUID = -4093378766907157884L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/admin/gest_users.jsp";
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String target = "/JSP/pages/Main.jsp";
 		request.setAttribute("title", "RezRes - Gestion des utilisateurs");
 		request.setAttribute("body", "Gestion des utilisateurs");
 		request.setAttribute("menu_entry", 5);
@@ -26,7 +26,11 @@ public class GestUsers extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handleRequest(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		handleRequest(request, response);
 	}
 }

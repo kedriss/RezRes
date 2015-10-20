@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 public class PanoramaAdmin extends HttpServlet {
 	private static final long serialVersionUID = -1975405839112280693L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/admin/panorama.jsp";
-		request.setAttribute("title", "RezRes - Panorama");
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String target = "/JSP/pages/Main.jsp";
+		request.setAttribute("title", "RezRes - Admin");
 		request.setAttribute("body", "Panorama");
 		request.setAttribute("menu_entry", 2);
 		
@@ -26,7 +26,11 @@ public class PanoramaAdmin extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handleRequest(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		handleRequest(request, response);
 	}
 }
