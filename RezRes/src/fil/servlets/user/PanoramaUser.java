@@ -15,9 +15,10 @@ public class PanoramaUser extends HttpServlet {
 	private static final long serialVersionUID = 749223966274794536L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		String target = "/JSP/pages/user/panorama.jsp";
 		request.setAttribute("title", "RezRes - Panorama");
 		request.setAttribute("body", "Panorama");
+		request.setAttribute("menu_entry", 0);
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();

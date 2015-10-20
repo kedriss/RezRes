@@ -15,9 +15,10 @@ public class GestTypeRessources extends HttpServlet {
 	private static final long serialVersionUID = -4391170416639320134L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		String target = "/JSP/pages/admin/gest_type.jsp";
 		request.setAttribute("title", "RezRes - Gestion des types de ressources");
 		request.setAttribute("body", "Gestion des type de ressources");
+		request.setAttribute("menu_entry", 3);
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();

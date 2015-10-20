@@ -15,9 +15,10 @@ public class GestRessources extends HttpServlet {
 	private static final long serialVersionUID = -5112025367936813560L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		String target = "/JSP/pages/admin/gest_res.jsp";
 		request.setAttribute("title", "RezRes - Gestion des ressources");
 		request.setAttribute("body", "Gestion des ressources");
+		request.setAttribute("menu_entry", 4);
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();

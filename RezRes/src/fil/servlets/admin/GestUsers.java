@@ -15,9 +15,10 @@ public class GestUsers extends HttpServlet {
 	private static final long serialVersionUID = -4093378766907157884L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		String target = "/JSP/pages/admin/gest_users.jsp";
 		request.setAttribute("title", "RezRes - Gestion des utilisateurs");
 		request.setAttribute("body", "Gestion des utilisateurs");
+		request.setAttribute("menu_entry", 5);
 		
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
