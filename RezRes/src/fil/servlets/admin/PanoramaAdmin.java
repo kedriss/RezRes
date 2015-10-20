@@ -9,13 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/admin")
 public class PanoramaAdmin extends HttpServlet {
 	private static final long serialVersionUID = -1975405839112280693L;
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		HttpSession session = request.getSession();
+		
+		String target = "/JSP/pages/admin/panorama.jsp";
 		request.setAttribute("title", "RezRes - Admin");
 		request.setAttribute("body", "Panorama");
 		request.setAttribute("menu_entry", 2);

@@ -9,13 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/reservation")
 public class Reservation extends HttpServlet {
 	private static final long serialVersionUID = -7239735635468259205L;
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		HttpSession session = request.getSession();
+		
+		String target = "/JSP/pages/user/reservation.jsp";
 		request.setAttribute("title", "RezRes - Reservation");
 		request.setAttribute("body", "Réserver");
 		request.setAttribute("menu_entry", 1);

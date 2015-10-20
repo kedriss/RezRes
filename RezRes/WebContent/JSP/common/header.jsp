@@ -28,7 +28,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/RezRes/h/">RezRes</a>
+			<a class="navbar-brand" href="/RezRes/home">RezRes</a>
 			<!-- TODO: Utiliser JSTL pour créer le lien. -->
 		</div>
 
@@ -36,14 +36,14 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/RezRes/h/">home</a></li>
+				<li><a href="/RezRes/user">Panorama</a></li>
 
-				<li><a href="/RezRes/h/page2">Page2</a></li>
+				<li><a href="/RezRes/user/reservation">Réserver</a></li>
 				<!-- TODO: Utiliser JSTL pour créer le lien. -->
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a role="button" class="btn btn-primary btn-lg" href="/RezRes/login">Login</a></li>
+				<li><a role="button" class="btn btn-lg btn-primary btn-block" href="/RezRes/login">Login</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

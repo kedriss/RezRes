@@ -15,7 +15,7 @@ public class Home extends HttpServlet {
 	private static final long serialVersionUID = -594667926099562461L;
 	
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		String target = "/JSP/pages/common/main.jsp";
 		request.setAttribute("title", "RezRes");
 		request.setAttribute("body", "Bienvenue sur RezRes !");
 		

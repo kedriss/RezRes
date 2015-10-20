@@ -9,13 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/admin/types")
 public class GestTypeRessources extends HttpServlet {
 	private static final long serialVersionUID = -4391170416639320134L;
 	
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/JSP/pages/Main.jsp";
+		HttpSession session = request.getSession();
+		
+		String target = "/JSP/pages/admin/gest_type.jsp";
 		request.setAttribute("title", "RezRes - Gestion des types de ressources");
 		request.setAttribute("body", "Gestion des types de ressources");
 		request.setAttribute("menu_entry", 3);
