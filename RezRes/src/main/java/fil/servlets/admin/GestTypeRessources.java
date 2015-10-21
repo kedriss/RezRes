@@ -49,6 +49,17 @@ public class GestTypeRessources extends HttpServlet {
 		}
 	}
 	
+	private void deleteAction(HttpServletRequest request)
+	{
+		String param = request.getParameter("cle");
+		Integer cle = Integer.parseInt(param);
+		if(cle != null)
+		{
+			TypeResssourcePersistenceJPA service = new TypeResssourcePersistenceJPA();
+			service.delete(cle);
+		}
+	}
+	
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
@@ -64,6 +75,7 @@ public class GestTypeRessources extends HttpServlet {
 			this.createAction(request);
 			break;
 		case "delete":
+			this.deleteAction(request);
 			break;
 		case "modify":
 			break;
