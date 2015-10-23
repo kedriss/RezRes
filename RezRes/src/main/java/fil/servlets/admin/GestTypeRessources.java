@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fil.bean.jpa.TypeResssourceEntity;
-import fil.persistence.services.jpa.TypeResssourcePersistenceJPA;
+import fil.bean.jpa.TypeRessourceEntity;
+import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 
 @WebServlet("/admin/types/*")
 public class GestTypeRessources extends HttpServlet {
@@ -31,8 +31,8 @@ public class GestTypeRessources extends HttpServlet {
 	
 	private void showAction(HttpServletRequest request)
 	{
-		TypeResssourcePersistenceJPA service = new TypeResssourcePersistenceJPA();
-		List<TypeResssourceEntity> type_res = service.loadAll();
+		TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
+		List<TypeRessourceEntity> type_res = service.loadAll();
 		request.setAttribute("list_type_res", type_res);
 	}
 	
@@ -42,8 +42,8 @@ public class GestTypeRessources extends HttpServlet {
 		System.out.println(nom);
 		if(nom != null)
 		{
-			TypeResssourcePersistenceJPA service = new TypeResssourcePersistenceJPA();
-			TypeResssourceEntity new_type_res = new TypeResssourceEntity();
+			TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
+			TypeRessourceEntity new_type_res = new TypeRessourceEntity();
 			new_type_res.setLibelle(nom);
 			service.insert(new_type_res);
 		}
@@ -55,7 +55,7 @@ public class GestTypeRessources extends HttpServlet {
 		Integer cle = Integer.parseInt(param);
 		if(cle != null)
 		{
-			TypeResssourcePersistenceJPA service = new TypeResssourcePersistenceJPA();
+			TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 			service.delete(cle);
 		}
 	}
