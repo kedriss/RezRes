@@ -13,6 +13,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/RezRes/CSS/dash.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
+
 <title>${title}</title>
 </head>
 <body>
