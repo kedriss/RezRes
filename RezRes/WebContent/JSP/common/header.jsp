@@ -46,7 +46,14 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><p class="navbar-btn"><a role="button" class="btn btn-success" href="/RezRes/login">Login</a></p></li>
+			<c:choose >
+				<c:when test="${connected == true}"> 
+				 
+				<li><p class="navbar-btn">Bonjour ${utilisateurConnecte.login} !<a role="button" class="btn btn-success" href="/RezRes/login/out">Déconnexion</a></p></li>
+				</c:when>
+				<c:otherwise><li><p class="navbar-btn"><a role="button" class="btn btn-success" href="/RezRes/login">Connexion</a></p></li></c:otherwise>
+				</c:choose>
+				
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

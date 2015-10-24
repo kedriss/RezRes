@@ -57,7 +57,7 @@ public class GestUsers extends HttpServlet {
 		ServletContext context = this.getServletContext();
 		String target= "/JSP/pages/admin/gest_users.jsp";
 		String pathInfo= request.getPathInfo();
-		System.out.println(pathInfo);
+		//System.out.println(pathInfo);
 		
 		switch (pathInfo+""){
 		case "/delete":

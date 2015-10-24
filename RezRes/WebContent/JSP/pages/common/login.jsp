@@ -52,17 +52,21 @@
 	<!-- /.container-fluid --> </nav>
 
 	<div id="container">
-		<form class="form-signin">
+		<c:if test="${connectionRefused==true}">
+			<div class="alert alert-danger">
+  					<strong>Refusé!</strong> Vérifier votre login et mot de passe
+			</div>
+		</c:if>
+		<form class="form-signin" method="post" role="form" action="http://127.0.0.1:8080/RezRes/login">
 			<h2 class="form-signin-heading">Log in</h2>
 
-			<label for="inputEmail" class="sr-only">Pseudo</label> 
-			<input id="name" placeholder="pseudonyme" class="form-control" required autofocus> 
+			<label for="login" class="sr-only">Pseudo</label> 
+			<input name="login" type="text" id="login" placeholder="login" class="form-control" required autofocus> 
 			
-			<label for="inputPassword" class="sr-only">Password</label> 
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<label for="pwd" class="sr-only">Password</label> 
+			<input name="pwd" type="password" id="pwd" class="form-control" placeholder="Password" required>
 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Log
-				in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 		</form>
 	</div>
 	
