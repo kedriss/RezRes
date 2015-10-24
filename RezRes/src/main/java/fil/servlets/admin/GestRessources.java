@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import fil.bean.jpa.RessourceEntity;
 import fil.bean.jpa.TypeRessourceEntity;
+import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.RessourcePersistence;
 import fil.persistence.services.TypeRessourcePersistence;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
+import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 
 @WebServlet("/admin/ressources/*")
 public class GestRessources extends HttpServlet {
@@ -144,6 +146,8 @@ public class GestRessources extends HttpServlet {
 			TypeRessourcePersistenceJPA service2 = new TypeRessourcePersistenceJPA();
 			List<TypeRessourceEntity> type_res2 = service2.loadAll();
 			request.setAttribute("typeRessources", type_res2);
+			List<UtilisateurEntity> entities = new UtilisateurPersistenceJPA().loadAll();
+			request.setAttribute("Utilisateurs", entities);
 
 			break;			
 		default:
