@@ -28,8 +28,9 @@
 				name="nom">
 			<button type="submit" class="btn btn-default">Créer</button>
 		</form>
-
+		
 		<c:if test="${mod_form == true}">
+			<hr>
 			<form action="/RezRes/admin/types/modify" class="form-inline"
 				role="form" method="post">
 				<label>Nouveau nom :</label>
@@ -56,14 +57,18 @@
 							<form action="/RezRes/admin/types/modify" class="form-inline"
 								role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
-								<button type="submit" class="btn btn-warning">MODIFIER</button>
+								<button type="submit" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-pencil"></span> Modifier
+								</button>
 							</form>
 						</td>
 						<td>
 							<form action="/RezRes/admin/types/delete" class="form-inline"
 								role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
-								<button type="submit" class="btn btn-danger">SUPPRIMER</button>
+								<button type="submit" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-remove"></span> Supprimer
+								</button>
 							</form>
 						</td>
 					</tr>

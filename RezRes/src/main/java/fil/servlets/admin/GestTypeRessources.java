@@ -42,25 +42,30 @@ public class GestTypeRessources extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
-	/*
 	private void modifyAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 		String nom = request.getParameter("nom");
 		String param = request.getParameter("cle");
 		try 
 		{
 			Integer cle = Integer.parseInt(param);
-			if(nom != null && cle != null)
+			if(nom != null && nom != "" && cle != null)
 			{
-				TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 				TypeRessourceEntity new_type_res = service.load(cle);
 				new_type_res.setLibelle(nom);
-				service.insert(new_type_res);
+				service.save(new_type_res);
+			}
+			else if( (nom == null || nom == "") && cle != null)
+			{
+				TypeRessourceEntity new_type_res = service.load(cle);
+				request.setAttribute("mod_form", true);
+				request.setAttribute("old_cle", new_type_res.getCle());
+				request.setAttribute("old_name", new_type_res.getLibelle());
 			}
 			else
 			{
-				request.setAttribute("mod_form", true);
-				request.setAttribute("old_name", old_name);
+				request.setAttribute("warning", "Impossible de modifié : pas de clef précisé.");
 			}
 		}
 		catch (NumberFormatException e)
@@ -68,9 +73,11 @@ public class GestTypeRessources extends HttpServlet {
 			request.setAttribute("warning", "Vous n'avez pas précisé de type à supprimer.");
 			this.showAction(request, response);
 		}
-		this.showAction(request, response);
+		finally
+		{
+			this.showAction(request, response);
+		}
 	}
-	*/
 	
 	private void createAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -127,6 +134,7 @@ public class GestTypeRessources extends HttpServlet {
 			this.deleteAction(request, response);
 			break;
 		case "modify":
+			this.modifyAction(request, response);
 			break;
 		default:
 			this.showAction(request, response);
