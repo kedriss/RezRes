@@ -18,7 +18,7 @@ import fil.persistence.services.TypeRessourcePersistence;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 
-@WebServlet("/admin/ressources")
+@WebServlet("/admin/ressources/*")
 public class GestRessources extends HttpServlet {
 	
 	private static final long serialVersionUID = -5112025367936813560L;
@@ -41,7 +41,7 @@ public class GestRessources extends HttpServlet {
 		//Récupération des modifications
 		String nom 		= request.getParameter("nom");
 		String description 	= request.getParameter("description");
-		int responsable 	= Integer.parseInt(request.getParameter("mail"));
+		int responsable 	= Integer.parseInt(request.getParameter("responsable"));
 		String localite = request.getParameter("localite");
 		int typeId 	= Integer.parseInt(request.getParameter("type"));
 			
@@ -72,7 +72,7 @@ public class GestRessources extends HttpServlet {
 		//Récupération des modifications
 		String nom 		= request.getParameter("nom");
 		String description 	= request.getParameter("description");
-		int responsable 	= Integer.parseInt(request.getParameter("mail"));
+		int responsable 	= Integer.parseInt(request.getParameter("responsable"));
 		String localite = request.getParameter("localite");
 		int typeId 	= Integer.parseInt(request.getParameter("type"));
 			
@@ -90,16 +90,22 @@ public class GestRessources extends HttpServlet {
 		ressourceService.save(creating);
 			
 		request.setAttribute("created", true);
-		getAllRessources(request);
-		//request.setAttribute("", "active");		
-		
-		
+		getAllRessources(request);	
 	}
 	
 	private void getAllRessources(HttpServletRequest request){
 		List<RessourceEntity> ressources = new RessourcePersistenceJPA().loadAll();
 		
 		request.setAttribute("ressources", ressources);		
+	}
+	
+	private void getRessource(HttpServletRequest request){
+		int id    = Integer.parseInt(request.getParameter("id"));
+		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
+		
+		RessourceEntity updating = ressourceService.load(id);
+		
+		request.setAttribute("ressource", updating);
 	}
 			
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,19 +121,33 @@ public class GestRessources extends HttpServlet {
 		case "/delete":
 			deleteRessource(request);
 			getAllRessources(request);
-			request.setAttribute("pano", "active");
 			break;
 		case "/modify":
 			updateRessource(request);
-			break;	
+			getAllRessources(request);
+			break;
+		case "/modify/form":
+			getRessource(request);
+			request.setAttribute("modification", true);
+			
+			TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
+			List<TypeRessourceEntity> type_res = service.loadAll();
+			request.setAttribute("typeRessources", type_res);
+			break;				
 		case "/create":
 			createRessource(request);
 			getAllRessources(request);
-			request.setAttribute("create", "active");
 			break;
+		case "/create/form":
+			request.setAttribute("creation", true);
+			
+			TypeRessourcePersistenceJPA service2 = new TypeRessourcePersistenceJPA();
+			List<TypeRessourceEntity> type_res2 = service2.loadAll();
+			request.setAttribute("typeRessources", type_res2);
+
+			break;			
 		default:
 			getAllRessources(request);
-			request.setAttribute("pano", "active");
 			break;
 		}
 		
