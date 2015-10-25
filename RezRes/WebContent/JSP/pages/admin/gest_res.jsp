@@ -15,8 +15,7 @@
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h2>Modification de la ressource : ${ressource.id}</h2>
-				<form action="http://localhost:8080/RezRes/admin/ressources/modify"
-					method="post" role="form" accept-charset="ISO-8859-1">
+				<form action="/RezRes/admin/ressources/modify" method="post" role="form">
 					<div class="form-group">
 					<input type="hidden" class="form-control" name="id" value="${ressource.id}" required>
 					</div>
@@ -54,8 +53,7 @@
 		<c:when test="${creation}">
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<form action="http://localhost:8080/RezRes/admin/ressources/create"
-					method="post" role="form" accept-charset="ISO-8859-1">
+				<form action="/RezRes/admin/ressources/create" method="post" role="form">
 					<div class="form-group">
 						<label>Nom</label> <input type="text" class="form-control"
 							name="nom" value="${ressource.nom}" required>
