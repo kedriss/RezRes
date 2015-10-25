@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.RessourceEntity;
 import fil.bean.jpa.TypeRessourceEntity;
@@ -30,27 +32,29 @@ import fil.servlets.UserServlet;
 public class Reservation extends UserServlet {
 	private static final long serialVersionUID = -7239735635468259205L;
 	private static final SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
-
+	private static Logger logger = Logger.getLogger(Reservation.class);
+	
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.handleRequest(request, response);
-		
+		logger.info(" Test : arrvivé dans la servlet reservation");
 		String pathInfo= request.getPathInfo();
-		
+		String target="/JSP/pages/user/panorama.jsp";
 		switch (pathInfo+""){
 	
 		case "/delete":
 			deleteAction(request, response);
+			 response.sendRedirect("/RezRes/user");
 			break; 
 		case "/create":
 			createAction(request, response);
+			 response.sendRedirect("/RezRes/user");
 			break;
 		default: 
 			formAction(request, response);
+			 target = "/JSP/pages/user/reservation.jsp";
 			break;
 		}
-		
-	
-		String target = "/JSP/pages/user/reservation.jsp";
+
 		request.setAttribute("title", "RezRes - Reservation");
 		request.setAttribute("body", "Réserver");
 		request.setAttribute("menu_entry", 1);
@@ -60,6 +64,7 @@ public class Reservation extends UserServlet {
 		rd = context.getRequestDispatcher(target);
 		try
 		{
+			
 			rd.forward(request, response);
 		} 
 		catch (IllegalStateException e) {}
@@ -93,7 +98,7 @@ public class Reservation extends UserServlet {
 		}
 
 	}
-	
+
 	private void deleteAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -101,10 +106,8 @@ public class Reservation extends UserServlet {
 		if(id!=null){
 			ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
 			reservationManager.delete(Integer.valueOf(id));
-			request.setAttribute("suppresion", true);
-			
-		}
-		
+			request.setAttribute("suppresion", true);	
+		}	
 	}
 
 	private void formAction(HttpServletRequest request,HttpServletResponse response) {
@@ -119,7 +122,6 @@ public class Reservation extends UserServlet {
 			List<TypeRessourceEntity> 		typeressources 			= typeRessourceManager.loadAll();
 			request.setAttribute("formCreate", true);
 			request.setAttribute("typeRessources", typeressources);
-		
 		} 
 		else {
 			try {
@@ -140,7 +142,10 @@ public class Reservation extends UserServlet {
 				e.printStackTrace();
 				request.setAttribute("problemeDate", true);
 			}
+
+			
 		}
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
