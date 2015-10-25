@@ -69,12 +69,13 @@
 							name="localite" value="${ressource.localite}" type="tel" required>
 					</div>
 					<div class="form-group">
-						<label>Responsable</label> <select type="number"
+						<label>Responsable</label> 
+						<select type="number"
 							class="form-control" name="responsable" required>
 							<c:forEach items="${Utilisateurs}" var="U">
 								<option value="${U.id}">${U.login}</option>
 							</c:forEach>
-							</select>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>Type</label><select name="type" class="form-control">
