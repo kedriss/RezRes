@@ -7,24 +7,20 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.RessourceEntity;
-import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
-import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
+import fil.servlets.UserServlet;
 
 @WebServlet("/user/reservation/*")
-public class Reservation extends HttpServlet {
+public class Reservation extends UserServlet {
 	private static final long serialVersionUID = -7239735635468259205L;
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		super.handleRequest(request, response);
 		
 		String pathInfo= request.getPathInfo();
 		
@@ -47,13 +43,16 @@ public class Reservation extends HttpServlet {
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
 		rd = context.getRequestDispatcher(target);
-		rd.forward(request, response);
+		try
+		{
+			rd.forward(request, response);
+		} 
+		catch (IllegalStateException e) {}
 	}
 	
 	
 
-	private void checkOverlap(RessourceEntity ressource, String date_debut,
-			String date_fin) {
+	private void checkOverlap(RessourceEntity ressource, String date_debut, String date_fin) {
 		// TODO Auto-generated method stub
 		
 	}
