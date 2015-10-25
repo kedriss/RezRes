@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.UtilisateurEntity;
+import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 import fil.servlets.AdminServlet;
 
@@ -175,9 +177,15 @@ public class GestUsers extends AdminServlet {
 		UtilisateurPersistenceJPA UtilisateurManager = new UtilisateurPersistenceJPA();
 		String identifiant = request.getParameter("id");
 		Integer id = Integer.valueOf(identifiant);
-		System.out.println("id a supprimé:"+id);
-		UtilisateurManager.delete(id);
-
+		
+		ReservationPersistenceJPA res_manager = new ReservationPersistenceJPA();
+		Map<String, Object> queryParameters = new HashMap<String, Object>();
+		queryParameters.put("idu", id);
+		List<ReservationEntity> res = res_manager.loadByNamedQuery("ReservationEntity.getAllByUser", queryParameters);
+		if(res == null || (res != null && res.isEmpty()))
+			UtilisateurManager.delete(id);
+		else
+			request.setAttribute("warning", "Impossible de supprimer l'utilisateur : des réservations y sont associées.");
 	}
 
 	public void Pano_action(HttpServletRequest request)

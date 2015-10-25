@@ -14,6 +14,12 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">${body}</h1>
+		<c:if test="${not empty warning}">
+			<div class="alert alert-warning">
+				<strong>Warning:</strong> 
+				${warning}
+			</div>
+		</c:if>
 
 
 <c:choose>

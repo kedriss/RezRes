@@ -115,11 +115,11 @@ public class GestTypeRessources extends AdminServlet {
 				TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 				
 				RessourcePersistenceJPA res_serv = new RessourcePersistenceJPA();
-				Map<String, Object> queryParameters = new HashMap<>();
+				Map<String, Object> queryParameters = new HashMap<String, Object>();
 				queryParameters.put("id", cle);
 				List<RessourceEntity> reservations = res_serv.loadByNamedQuery("RessourceEntity.getByType", queryParameters);
 				
-				if(reservations != null && reservations.isEmpty())
+				if(reservations == null || (reservations != null && reservations.isEmpty()))
 					service.delete(cle);
 				else
 					request.setAttribute("warning", "Impossible de supprimer le type : des ressources y sont associées.");
