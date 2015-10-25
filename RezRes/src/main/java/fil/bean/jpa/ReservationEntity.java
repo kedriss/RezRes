@@ -27,6 +27,7 @@ import javax.persistence.*;
 // Define named queries here
 @NamedQueries ( {
   @NamedQuery ( name="ReservationEntity.countAll", query="SELECT COUNT(x) FROM ReservationEntity x" ),
+  @NamedQuery ( name="ReservationEntity.CheckOverLap", query="SELECT res FROM ReservationEntity res WHERE res.dateDebut > :start AND res.dateFin < :end"),
   @NamedQuery ( name="ReservationEntity.filterDates", query="SELECT res FROM ReservationEntity res WHERE res.dateDebut > :start AND res.dateFin < :end")
 } )
 public class ReservationEntity implements Serializable {
