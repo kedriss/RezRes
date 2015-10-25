@@ -7,15 +7,20 @@
 
 <div class="container-fluid">
 	<jsp:include page="/JSP/common/dash.jsp"></jsp:include>
-
-	<c:choose>
-		<c:when test="${modification}">
-
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		<c:if test="${not empty warning}">
+			<div class="alert alert-warning">
+				<strong>Warning:</strong> ${warning}
+			</div>
+		</c:if>
+		<c:choose>
+			<c:when test="${modification}">
 				<h2>Modification de la ressource : ${ressource.id}</h2>
-				<form action="<c:url value="/admin/ressources/modify"/>" method="post" role="form">
+				<form action="<c:url value="/admin/ressources/modify"/>"
+					method="post" role="form">
 					<div class="form-group">
-					<input type="hidden" class="form-control" name="id" value="${ressource.id}" required>
+						<input type="hidden" class="form-control" name="id"
+							value="${ressource.id}" required>
 					</div>
 					<div class="form-group">
 						<label>Nom</label> <input type="text" class="form-control"
@@ -36,22 +41,22 @@
 					</div>
 					<div class="form-group">
 						<label>Type</label><select name="type" class="form-control">
-						<c:forEach items="${typeRessources}" var="typeRessource">
-							<option value="${typeRessource.cle}">${typeRessource.libelle}</option>
-						</c:forEach>
+							<c:forEach items="${typeRessources}" var="typeRessource">
+								<option value="${typeRessource.cle}">${typeRessource.libelle}</option>
+							</c:forEach>
 						</select>
-					</div>					
+					</div>
 					<button type="submit" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-ok"></span>
 					</button>
 				</form>
-			</div>
-		</c:when>
 
-		<c:when test="${creation}">
+			</c:when>
 
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<form action="<c:url value="/admin/ressources/create"/>" method="post" role="form">
+			<c:when test="${creation}">
+
+				<form action="<c:url value="/admin/ressources/create"/>"
+					method="post" role="form">
 					<div class="form-group">
 						<label>Nom</label> <input type="text" class="form-control"
 							name="nom" value="${ressource.nom}" required>
@@ -65,8 +70,7 @@
 							name="localite" value="${ressource.localite}" type="tel" required>
 					</div>
 					<div class="form-group">
-						<label>Responsable</label> 
-						<select type="number"
+						<label>Responsable</label> <select type="number"
 							class="form-control" name="responsable" required>
 							<c:forEach items="${Utilisateurs}" var="U">
 								<option value="${U.id}">${U.login}</option>
@@ -75,20 +79,18 @@
 					</div>
 					<div class="form-group">
 						<label>Type</label><select name="type" class="form-control">
-						<c:forEach items="${typeRessources}" var="typeRessource">
-							<option value="${typeRessource.cle}">${typeRessource.libelle}</option>
-						</c:forEach>
+							<c:forEach items="${typeRessources}" var="typeRessource">
+								<option value="${typeRessource.cle}">${typeRessource.libelle}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</form>
-			</div>
-		</c:when>
+			</c:when>
 
-		<c:otherwise>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<c:otherwise>
 				<h1 class="page-header">${body}</h1>
 				<table class="table tact">
 					<thead>
@@ -114,7 +116,9 @@
 									<form action="<c:url value="/admin/ressources/modify/form"/>"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id">
-										<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="submit" class="btn btn-default btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span>
+										</button>
 									</form>
 									<form action="<c:url value="/admin/ressources/delete"/>"
 										class="form-inline" role="form" method="post">
@@ -132,13 +136,12 @@
 				<form action="<c:url value="/admin/ressources/create/form"/>"
 					class="form-inline" role="form" method="post">
 					<button type="submit" class="btn btn-default btn-sm">
-					<span class="glyphicon glyphicon-plus"></span>
+						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</form>
-			</div>
-		</c:otherwise>
-	</c:choose>
-
+			</c:otherwise>
+		</c:choose>
+	</div>
 
 </div>
 

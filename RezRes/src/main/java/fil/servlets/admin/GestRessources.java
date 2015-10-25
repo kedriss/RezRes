@@ -1,7 +1,9 @@
 package fil.servlets.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -31,7 +33,15 @@ public class GestRessources extends AdminServlet {
 		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		ressourceService.delete(id);
+		RessourcePersistenceJPA res_serv = new RessourcePersistenceJPA();
+		Map<String, Object> queryParameters = new HashMap<String, Object>();
+		queryParameters.put("idr", id);
+		List<RessourceEntity> reservations = res_serv.loadByNamedQuery("ReservationEntity.getAllByRessource", queryParameters);
+		
+		if(reservations == null || (reservations != null && reservations.isEmpty()))
+			ressourceService.delete(id);
+		else
+			request.setAttribute("warning", "Impossible de supprimer la ressource : des réservations y sont associées.");
 	}
 	
 	//TODO Tester si attribut non null pour ceux nécessaire

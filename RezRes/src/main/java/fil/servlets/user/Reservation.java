@@ -93,14 +93,7 @@ public class Reservation extends UserServlet {
 		}
 
 	}
-
-
-
-	private void checkOverlap(RessourceEntity ressource, String date_debut, String date_fin) {
-		
-		
-	}
-
+	
 	private void deleteAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -129,8 +122,6 @@ public class Reservation extends UserServlet {
 		
 		} 
 		else {
-			
-			
 			try {
 				Date debut = dateParser.parse(request.getParameter("start"));
 				Date fin   = dateParser.parse(request.getParameter("end"));
@@ -149,10 +140,7 @@ public class Reservation extends UserServlet {
 				e.printStackTrace();
 				request.setAttribute("problemeDate", true);
 			}
-
-			
 		}
-		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

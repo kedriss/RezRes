@@ -29,7 +29,8 @@ import javax.persistence.*;
   @NamedQuery ( name="ReservationEntity.countAll", query="SELECT COUNT(x) FROM ReservationEntity x" ),
   @NamedQuery ( name="ReservationEntity.CheckOverLap", query="SELECT res FROM ReservationEntity res WHERE res.dateDebut > :start AND res.dateFin < :end"),
   @NamedQuery ( name="ReservationEntity.filterDates", query="SELECT res FROM ReservationEntity res WHERE res.dateDebut > :start AND res.dateFin < :end"),
-  @NamedQuery ( name="ReservationEntity.getAllByUser", query="SELECT res FROM ReservationEntity res WHERE res.utilisateur.id = :idu")
+  @NamedQuery ( name="ReservationEntity.getAllByUser", query="SELECT res FROM ReservationEntity res WHERE res.utilisateur.id = :idu"),
+  @NamedQuery ( name="ReservationEntity.getAllByRessource", query="SELECT res FROM ReservationEntity res WHERE res.ressource.id = :idr")
 } )
 public class ReservationEntity implements Serializable {
 
