@@ -22,7 +22,7 @@
 
 <!-- CAS DE MODIFICATION D'UN UTILISATEUR -->
 Modification des information de l'utilisateur : ${utilisateur.login}
-<form action="http://127.0.0.1:8080/RezRes/admin/users/modify"  method="post"role="form" accept-charset="ISO-8859-1">
+<form action="<c:url value="/admin/users/create"/>"  method="post"role="form">
 					<div class="form-group">
 						<label>Prénom</label> <input type="text" class="form-control"
 							name="prenom"  value="${utilisateur.prenom}" required>
@@ -95,7 +95,7 @@ Modification des information de l'utilisateur : ${utilisateur.login}
 								<td>${U.mail}</td>
 								<td>${U.telephone}</td>
 								<td>${U.type}</td>
-								<td><form action="http://127.0.0.1:8080/RezRes/admin/users/modify" class="form-inline"
+								<td><form action="<c:url value="/admin/users/modify"/>" class="form-inline"
 										role="form" method="post">
 										<input name="id" type="hidden" value="${U.id}" />
 										<button type="submit" class="btn btn-default btn-sm">
@@ -104,7 +104,7 @@ Modification des information de l'utilisateur : ${utilisateur.login}
 									</form></td>
 
 								<td>
-									<form action="http://127.0.0.1:8080/RezRes/admin/users/delete" class="form-inline" role="form"
+									<form action="<c:url value="/admin/users/delete"/>" class="form-inline" role="form"
 										method="post">
 										<input name="id" type="hidden" value="${U.id}" />
 										<button type="submit" class="btn btn-default btn-sm">
@@ -131,7 +131,7 @@ Modification des information de l'utilisateur : ${utilisateur.login}
   					<strong>OK!</strong> Utilisateur correctement créé.
 				</div>
 				</c:if>
-				<form action="http://127.0.0.1:8080/RezRes/admin/users/create"  method="post"role="form" accept-charset="ISO-8859-1">
+				<form action="<c:url value="/admin/users/create"/>"  method="post"role="form">
 					<div class="form-group">
 						<label>Prénom</label> <input type="text" class="form-control"
 							name="prenom" required>

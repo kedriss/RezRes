@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <jsp:include page="/JSP/common/header.jsp"></jsp:include>
 
@@ -15,7 +13,7 @@
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h2>Modification de la ressource : ${ressource.id}</h2>
-				<form action="/RezRes/admin/ressources/modify" method="post" role="form">
+				<form action="<c:url value="/admin/ressources/modify"/>" method="post" role="form">
 					<div class="form-group">
 					<input type="hidden" class="form-control" name="id" value="${ressource.id}" required>
 					</div>
@@ -53,7 +51,7 @@
 		<c:when test="${creation}">
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<form action="/RezRes/admin/ressources/create" method="post" role="form">
+				<form action="<c:url value="/admin/ressources/create"/>" method="post" role="form">
 					<div class="form-group">
 						<label>Nom</label> <input type="text" class="form-control"
 							name="nom" value="${ressource.nom}" required>
@@ -113,12 +111,12 @@
 								<td>${res.responsable}</td>
 								<td>${res.typeRessource.libelle}</td>
 								<td>
-									<form action="/RezRes/admin/ressources/modify/form"
+									<form action="<c:url value="/admin/ressources/modify/form"/>"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id">
 										<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
 									</form>
-									<form action="/RezRes/admin/ressources/delete"
+									<form action="<c:url value="/admin/ressources/delete"/>"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id">
 										<button type="submit" class="btn btn-default btn-sm">
@@ -131,7 +129,7 @@
 					</tbody>
 				</table>
 
-				<form action="/RezRes/admin/ressources/create/form"
+				<form action="<c:url value="/admin/ressources/create/form"/>"
 					class="form-inline" role="form" method="post">
 					<button type="submit" class="btn btn-default btn-sm">
 					<span class="glyphicon glyphicon-plus"></span>

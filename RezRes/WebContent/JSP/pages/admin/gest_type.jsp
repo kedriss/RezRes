@@ -22,7 +22,7 @@
 		</c:if>
 		
 		<h2>Rajouter un type ressource :</h2>
-		<form action="/RezRes/admin/types/create" class="form-inline"
+		<form action="<c:url value="/admin/types/create"/>" class="form-inline"
 			role="form" method="post">
 			<label>Nom du type :</label> <input class="form-control" type="nom"
 				name="nom">
@@ -31,7 +31,7 @@
 		
 		<c:if test="${mod_form == true}">
 			<hr>
-			<form action="/RezRes/admin/types/modify" class="form-inline"
+			<form action="<c:url value="/admin/types/modify"/>" class="form-inline"
 				role="form" method="post">
 				<label>Nouveau nom :</label>
 				 <input class="form-control" type="nom" name="nom" value="${old_name}">
@@ -54,7 +54,7 @@
 						<td>${tres.cle}</td>
 						<td>${tres.libelle}</td>
 						<td>
-							<form action="/RezRes/admin/types/modify" class="form-inline"
+							<form action="<c:url value="/admin/types/modify"/>" class="form-inline"
 								role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
 								<button type="submit" class="btn btn-default btn-sm">
@@ -63,7 +63,7 @@
 							</form>
 						</td>
 						<td>
-							<form action="/RezRes/admin/types/delete" class="form-inline"
+							<form action="<c:url value="/admin/types/delete"/>" class="form-inline"
 								role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
 								<button type="submit" class="btn btn-default btn-sm">

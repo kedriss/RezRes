@@ -16,8 +16,7 @@
 		<h1 class="page-header">${body}</h1>
 
 
-		<form action="http://localhost:8080/RezRes/admin/filter" method="post"
-			role="form" accept-charset="ISO-8859-1">
+		<form action="<c:url value="/admin/filter"/>" method="post" role="form"">
 			<div class="form-group">
 				<label>Date de début</label> <input type="date" class="form-control"
 					name="start" value="" required>

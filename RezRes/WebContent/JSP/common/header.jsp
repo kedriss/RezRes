@@ -31,7 +31,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/RezRes/home">RezRes</a>
+			<a class="navbar-brand" href="<c:url value="/home"/>">RezRes</a>
 			<!-- TODO: Utiliser JSTL pour créer le lien. -->
 		</div>
 
@@ -39,9 +39,9 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/RezRes/user">Panorama</a></li>
+				<li><a href="<c:url value="/user"/>">Panorama</a></li>
 
-				<li><a href="/RezRes/user/reservation">Réserver</a></li>
+				<li><a href="<c:url value="/user/reservation"/>">Réserver</a></li>
 				<!-- TODO: Utiliser JSTL pour créer le lien. -->
 			</ul>
 
@@ -49,9 +49,9 @@
 			<c:choose >
 				<c:when test="${connected == true}"> 
 				 
-				<li><p class="navbar-btn">Bonjour ${utilisateurConnecte.login} !<a role="button" class="btn btn-success" href="/RezRes/login/out">Déconnexion</a></p></li>
+				<li><p class="navbar-btn">Bonjour ${utilisateurConnecte.login} !<a role="button" class="btn btn-success" href="<c:url value="/login/out"/>">Déconnexion</a></p></li>
 				</c:when>
-				<c:otherwise><li><p class="navbar-btn"><a role="button" class="btn btn-success" href="/RezRes/login">Connexion</a></p></li></c:otherwise>
+				<c:otherwise><li><p class="navbar-btn"><a role="button" class="btn btn-success" href="<c:url value="/login"/>">Connexion</a></p></li></c:otherwise>
 				</c:choose>
 				
 			</ul>

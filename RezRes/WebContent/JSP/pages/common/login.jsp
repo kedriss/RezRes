@@ -29,7 +29,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/RezRes/home">RezRes</a>
+			<a class="navbar-brand" href="<c:url value="/home"/>">RezRes</a>
 			<!-- TODO: Utiliser JSTL pour créer le lien. -->
 		</div>
 
@@ -37,9 +37,9 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/RezRes/user">Panorama</a></li>
+				<li><a href="<c:url value="/user"/>">Panorama</a></li>
 
-				<li><a href="/RezRes/user/reservation">Réserver</a></li>
+				<li><a href="<c:url value="/user/reservation"/>">Réserver</a></li>
 				<!-- TODO: Utiliser JSTL pour créer le lien. -->
 			</ul>
 
@@ -57,7 +57,7 @@
   					<strong>Refusé!</strong> Vérifier votre login et mot de passe
 			</div>
 		</c:if>
-		<form class="form-signin" method="post" role="form" action="http://127.0.0.1:8080/RezRes/login">
+		<form class="form-signin" method="post" role="form" action="<c:url value="/login"/>">
 			<h2 class="form-signin-heading">Log in</h2>
 
 			<label for="login" class="sr-only">Pseudo</label> 
