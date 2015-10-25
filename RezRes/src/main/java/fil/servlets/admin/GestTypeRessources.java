@@ -1,7 +1,9 @@
 package fil.servlets.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -9,9 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import fil.bean.jpa.ReservationEntity;
+import fil.bean.jpa.RessourceEntity;
 import fil.bean.jpa.TypeRessourceEntity;
+import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.servlets.AdminServlet;
 
@@ -99,7 +103,7 @@ public class GestTypeRessources extends AdminServlet {
 		}
 		this.showAction(request, response);
 	}
-
+	
 	private void deleteAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String param = request.getParameter("cle");
@@ -109,7 +113,16 @@ public class GestTypeRessources extends AdminServlet {
 			if(cle != null)
 			{
 				TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
-				service.delete(cle);
+				
+				RessourcePersistenceJPA res_serv = new RessourcePersistenceJPA();
+				Map<String, Object> queryParameters = new HashMap<>();
+				queryParameters.put("id", cle);
+				List<RessourceEntity> reservations = res_serv.loadByNamedQuery("RessourceEntity.getByType", queryParameters);
+				
+				if(reservations != null && reservations.isEmpty())
+					service.delete(cle);
+				else
+					request.setAttribute("warning", "Impossible de supprimer le type : des ressources y sont associées.");
 			}
 			this.showAction(request, response);
 		}

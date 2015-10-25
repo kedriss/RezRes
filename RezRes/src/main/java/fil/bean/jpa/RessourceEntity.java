@@ -26,7 +26,8 @@ import javax.persistence.*;
 @Table(name="RESSOURCE", schema="PUBLIC", catalog="REZRES" )
 // Define named queries here
 @NamedQueries ( {
-  @NamedQuery ( name="RessourceEntity.countAll", query="SELECT COUNT(x) FROM RessourceEntity x" )
+  @NamedQuery ( name="RessourceEntity.countAll", query="SELECT COUNT(x) FROM RessourceEntity x" ),
+  @NamedQuery ( name="RessourceEntity.getByType", query="SELECT r FROM RessourceEntity r WHERE r.typeRessource.cle = :id" )
 } )
 public class RessourceEntity implements Serializable {
 
