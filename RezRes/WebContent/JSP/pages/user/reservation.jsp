@@ -16,7 +16,7 @@
 		<c:when test="${formCreate}">
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1>Que souhaitez vous?</h1>
-				<form action="/RezRes/user/ressources/" method="post" role="form">
+				<form action="/RezRes/user/reservation" method="post" role="form">
 					<div class="form-group">
 						<label>Type</label><select name="type" class="form-control">
 							<c:forEach items="${typeRessources}" var="typeRessource">
@@ -66,8 +66,8 @@
 									<form action="/RezRes/user/reservation/create"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id"> <input
-											value="${start}" type="hidden" name="id"> <input
-											value="${end}" type="hidden" name="id">
+											value="${start}" type="hidden" name="start"> <input
+											value="${end}" type="hidden" name="end">
 										<button type="submit" class="btn btn-default btn-sm">
 											<span class="glyphicon glyphicon-ok"></span>
 										</button>
