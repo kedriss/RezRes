@@ -7,7 +7,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,14 +18,16 @@ import fil.persistence.services.TypeRessourcePersistence;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
+import fil.servlets.AdminServlet;
 
 @WebServlet("/admin/ressources/*")
-public class GestRessources extends HttpServlet {
+public class GestRessources extends AdminServlet {
 	
 	private static final long serialVersionUID = -5112025367936813560L;
 	private static String JSP_RES_PATH = "/JSP/pages/admin/gest_res.jsp";
 	
-	private void deleteRessource(HttpServletRequest request){
+	private void deleteRessource(HttpServletRequest request)
+	{
 		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
 		int id = Integer.parseInt(request.getParameter("id"));
 		
@@ -34,7 +35,8 @@ public class GestRessources extends HttpServlet {
 	}
 	
 	//TODO Tester si attribut non null pour ceux nécessaire
-	private void updateRessource(HttpServletRequest request){	
+	private void updateRessource(HttpServletRequest request)
+	{	
 		int id    = Integer.parseInt(request.getParameter("id"));
 		
 		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
@@ -66,7 +68,8 @@ public class GestRessources extends HttpServlet {
 	}
 	
 	//TODO Tester si attribut non null pour ceux nécessaire
-	private void createRessource(HttpServletRequest request){
+	private void createRessource(HttpServletRequest request)
+	{
 		
 		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
 		RessourceEntity creating = new RessourceEntity();
@@ -95,13 +98,15 @@ public class GestRessources extends HttpServlet {
 		getAllRessources(request);	
 	}
 	
-	private void getAllRessources(HttpServletRequest request){
+	private void getAllRessources(HttpServletRequest request)
+	{
 		List<RessourceEntity> ressources = new RessourcePersistenceJPA().loadAll();
 		
 		request.setAttribute("ressources", ressources);		
 	}
 	
-	private void getRessource(HttpServletRequest request){
+	private void getRessource(HttpServletRequest request)
+	{
 		int id    = Integer.parseInt(request.getParameter("id"));
 		RessourcePersistence ressourceService = new RessourcePersistenceJPA();
 		
@@ -110,8 +115,9 @@ public class GestRessources extends HttpServlet {
 		request.setAttribute("ressource", updating);
 	}
 			
-	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession();
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		super.handleRequest(request, response);
 		
 		request.setAttribute("title", "RezRes - Gestion des ressources");
 		request.setAttribute("body", "Gestion des ressources");
@@ -119,7 +125,8 @@ public class GestRessources extends HttpServlet {
 		
 		String pathInfo= request.getPathInfo();
 		
-		switch (pathInfo+""){
+		switch (pathInfo+"")
+		{
 		case "/delete":
 			deleteRessource(request);
 			getAllRessources(request);
@@ -131,7 +138,7 @@ public class GestRessources extends HttpServlet {
 		case "/modify/form":
 			getRessource(request);
 			request.setAttribute("modification", true);
-			
+
 			TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 			List<TypeRessourceEntity> type_res = service.loadAll();
 			request.setAttribute("typeRessources", type_res);
@@ -142,7 +149,7 @@ public class GestRessources extends HttpServlet {
 			break;
 		case "/create/form":
 			request.setAttribute("creation", true);
-			
+
 			TypeRessourcePersistenceJPA service2 = new TypeRessourcePersistenceJPA();
 			List<TypeRessourceEntity> type_res2 = service2.loadAll();
 			request.setAttribute("typeRessources", type_res2);
@@ -158,14 +165,10 @@ public class GestRessources extends HttpServlet {
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
 		rd = context.getRequestDispatcher(JSP_RES_PATH);
-		rd.forward(request, response);
-	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request, response);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request, response);
+		try
+		{
+			rd.forward(request, response);
+		} 
+		catch (IllegalStateException e) {}
 	}
 }

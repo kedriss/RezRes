@@ -7,16 +7,16 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fil.bean.jpa.TypeRessourceEntity;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
+import fil.servlets.AdminServlet;
 
 @WebServlet("/admin/types/*")
-public class GestTypeRessources extends HttpServlet {
+public class GestTypeRessources extends AdminServlet {
 	private static final long serialVersionUID = -4391170416639320134L;
 	private static final String target = "/JSP/pages/admin/gest_type.jsp";
 
@@ -39,7 +39,11 @@ public class GestTypeRessources extends HttpServlet {
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
 		rd = context.getRequestDispatcher(target);
-		rd.forward(request, response);
+		try
+		{
+			rd.forward(request, response);
+		} 
+		catch (IllegalStateException e) {}
 	}
 	
 	private void modifyAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -116,8 +120,9 @@ public class GestTypeRessources extends HttpServlet {
 		}
 	}
 
-	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		super.handleRequest(request, response);
 		
 		request.setAttribute("title", "RezRes - Gestion des types de ressources");
 		request.setAttribute("body", "Gestion des types de ressources");
@@ -139,13 +144,5 @@ public class GestTypeRessources extends HttpServlet {
 		default:
 			this.showAction(request, response);
 		}
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request, response);
 	}
 }
