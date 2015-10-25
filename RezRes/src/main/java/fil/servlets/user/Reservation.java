@@ -1,7 +1,9 @@
 package fil.servlets.user;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.RessourceEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
@@ -52,9 +55,14 @@ public class Reservation extends UserServlet {
 	
 	
 
-	private void checkOverlap(RessourceEntity ressource, String date_debut, String date_fin) {
-		// TODO Auto-generated method stub
-		
+	private boolean checkOverlap(RessourceEntity ressource, String date_debut, String date_fin) {
+		ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
+		Map<String, Object> criteria = new HashMap<String, Object>();
+		criteria.put("ID_RESSOURCE", ressource.getId());
+		criteria.put("DATE_DEBUT", ">="+date_debut);
+		criteria.put("DATE_FIN", "<="+date_fin);
+		List<ReservationEntity> res = reservationManager.search(criteria);
+		return (res == null || res.isEmpty());
 	}
 
 	private void deleteAction(HttpServletRequest request,
