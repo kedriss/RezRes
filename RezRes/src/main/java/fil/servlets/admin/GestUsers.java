@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
@@ -30,9 +32,7 @@ public class GestUsers extends AdminServlet {
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		super.handleRequest(request, response);
-		
 		RequestDispatcher rd;
-
 		request.setAttribute("title", "RezRes - Gestion des utilisateurs");
 		request.setAttribute("body", "Gestion des utilisateurs");
 		request.setAttribute("menu_entry", 5);
@@ -56,8 +56,6 @@ public class GestUsers extends AdminServlet {
 		ServletContext context = this.getServletContext();
 		String target= "/JSP/pages/admin/gest_users.jsp";
 		String pathInfo= request.getPathInfo();
-		//System.out.println(pathInfo);
-
 		switch (pathInfo+""){
 		case "/delete":
 			System.out.println("delete case");
@@ -141,6 +139,7 @@ public class GestUsers extends AdminServlet {
 		String telephone = request.getParameter("telephone");
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
+		String hashedPwd = pwd.hashCode()+"";
 		String type = request.getParameter("type");
 		UtilisateurPersistenceJPA UtilisateurManager = new UtilisateurPersistenceJPA();
 		Map<String, Object> map=new HashMap<String, Object> ();
@@ -159,7 +158,7 @@ public class GestUsers extends AdminServlet {
 			utilisateur.setPrenom(prenom);
 			utilisateur.setMail(mail);
 			utilisateur.setLogin(login);
-			utilisateur.setPwd(pwd);
+			utilisateur.setPwd(hashedPwd);
 			utilisateur.setTelephone(telephone);
 			UtilisateurManager.insert(utilisateur);
 			request.setAttribute("loginCreer",true);

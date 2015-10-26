@@ -56,13 +56,14 @@ public class GestRessources extends AdminServlet {
 		String nom 		= request.getParameter("nom");
 		String description 	= request.getParameter("description");
 		int responsable 	= Integer.parseInt(request.getParameter("responsable"));
+		UtilisateurEntity responsableU = new UtilisateurPersistenceJPA().load(responsable);
 		String localite = request.getParameter("localite");
 		int typeId 	= Integer.parseInt(request.getParameter("type"));
 			
 		updating.setNom(nom);
 		updating.setDescription(description);
 		updating.setLocalite(localite);
-		updating.setResponsable(responsable);
+		updating.setUtilisateur(responsableU);
 
 		//Récupération du type correspondant à l'id
 		TypeRessourcePersistence typeRessourceService = new TypeRessourcePersistenceJPA();
@@ -88,13 +89,14 @@ public class GestRessources extends AdminServlet {
 		String nom 		= request.getParameter("nom");
 		String description 	= request.getParameter("description");
 		int responsable 	= Integer.parseInt(request.getParameter("responsable"));
+		UtilisateurEntity responsableU = new UtilisateurPersistenceJPA().load(responsable);
 		String localite = request.getParameter("localite");
 		int typeId 	= Integer.parseInt(request.getParameter("type"));
 			
 		creating.setNom(nom);
 		creating.setDescription(description);
 		creating.setLocalite(localite);
-		creating.setResponsable(responsable);
+		creating.setUtilisateur(responsableU);
 
 		//Récupération du type correspondant à l'id
 		TypeRessourcePersistence typeRessourceService = new TypeRessourcePersistenceJPA();

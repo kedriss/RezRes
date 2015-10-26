@@ -60,7 +60,7 @@
 								<td>${res.nom}</td>
 								<td>${res.description}</td>
 								<td>${res.localite}</td>
-								<td>${res.responsable}</td>
+								<td>${res.utilisateur.login}</td>
 								<td>${res.typeRessource.libelle}</td>
 								<td>
 									<form action="/RezRes/user/reservation/create"

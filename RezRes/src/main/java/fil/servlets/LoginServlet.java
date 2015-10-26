@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
@@ -77,8 +80,13 @@ public class LoginServlet extends HttpServlet {
 		{ // recherche d'une concordance avec login et mot de passe
 			UtilisateurPersistenceJPA utilisateurManager = new UtilisateurPersistenceJPA();
 			Map<String, Object> criteria = new HashMap<String, Object>();
+			
 			criteria.put("login", login);
-			criteria.put("pwd", pwd);
+			String hashedPwd = pwd.hashCode()+"";
+			System.out.println(hashedPwd);
+			System.out.println(pwd);
+			criteria.put("pwd", hashedPwd);
+			
 			List<UtilisateurEntity> Uentities = utilisateurManager.search(criteria);
 			if(Uentities.size() >0)
 			{
