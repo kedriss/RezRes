@@ -12,8 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
