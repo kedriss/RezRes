@@ -28,8 +28,9 @@ import javax.persistence.*;
 @NamedQueries ( {
   @NamedQuery ( name="RessourceEntity.countAll", query="SELECT COUNT(x) FROM RessourceEntity x" ),
   @NamedQuery ( name="RessourceEntity.getFreeRessource", query="SELECT x FROM RessourceEntity x where x.typeRessource.cle = :type "
-				+ "AND NOT EXISTS (SELECT 1 FROM ReservationEntity y WHERE y.ressource = x "
-				+ "AND (:date_debut BETWEEN y.dateDebut and y.dateFin OR :date_fin BETWEEN y.dateDebut and y.dateFin))" ),
+				+ " AND NOT EXISTS (SELECT 1 FROM ReservationEntity y WHERE y.ressource = x "
+				+ " AND (:date_debut BETWEEN y.dateDebut and y.dateFin OR :date_fin BETWEEN y.dateDebut and y.dateFin"
+				+ " OR y.dateDebut BETWEEN :date_debut and :date_fin  OR y.dateFin BETWEEN :date_debut and :date_fin))" ),
   @NamedQuery ( name="RessourceEntity.getByType", query="SELECT r FROM RessourceEntity r WHERE r.typeRessource.cle = :id" )
 } )
 public class RessourceEntity implements Serializable {
