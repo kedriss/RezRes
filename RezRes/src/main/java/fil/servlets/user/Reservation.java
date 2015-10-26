@@ -82,7 +82,10 @@ public class Reservation extends UserServlet {
 		String endDate = request.getParameter("endDate");
 		String endTime = request.getParameter("endTime");
 
-		if (startDate != null && startTime != null && endDate != null && endTime != null) {
+		if (startDate == null || startTime == null || endDate == null || endTime == null) {
+			request.setAttribute("warning", "Tous les champs doivent être saisies");
+		}
+		else{
 			try {
 				Date startDateTime = dateParser.parse(startDate + " " + startTime);
 				Date endDateTime = dateParser.parse(endDate + " " + endTime);
@@ -98,8 +101,7 @@ public class Reservation extends UserServlet {
 				reservationManager.save(reservation);
 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				request.setAttribute("warning", "La date doit être au format 'yyyy-MM-dd' et l'heure au format 'HH:mm'");
 			}
 		}
 
@@ -117,38 +119,48 @@ public class Reservation extends UserServlet {
 
 	private void formAction(HttpServletRequest request, HttpServletResponse response) {
 		String typeressource = request.getParameter("type");
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
+		
+		String startDate = request.getParameter("startDate");
+		String startTime = request.getParameter("startTime");
+		String endDate = request.getParameter("endDate");
+		String endTime = request.getParameter("endTime");
 
 		// On arrive sur le formulaire vide
-		if (typeressource == null) {
-			TypeRessourcePersistenceJPA typeRessourceManager = new TypeRessourcePersistenceJPA();
-			List<TypeRessourceEntity> typeressources = typeRessourceManager.loadAll();
-			request.setAttribute("formCreate", true);
-			request.setAttribute("typeRessources", typeressources);
+		if (typeressource == null || startDate == null || startTime == null || endDate == null || endTime == null ) {
+			setUpForm(request, response);
 		} else {
 			try {
-				Date debut = dateParser.parse(request.getParameter("start"));
-				Date fin = dateParser.parse(request.getParameter("end"));
+				Date startDateTime = dateParser.parse(startDate + " " + startTime);
+				Date endDateTime = dateParser.parse(endDate + " " + endTime);
 				Map<String, Object> criters = new HashMap<String, Object>();
 
 				criters.put("type", Integer.valueOf(typeressource));
-				criters.put("date_debut", debut);
-				criters.put("date_fin", fin);
+				criters.put("date_debut", startDateTime);
+				criters.put("date_fin", endDateTime);
 				RessourcePersistenceJPA ressourceManager = new RessourcePersistenceJPA();
 				List<RessourceEntity> ressourcesLibres = ressourceManager
 						.loadByNamedQuery("RessourceEntity.getFreeRessource", criters);
 
-				request.setAttribute("start", start);
-				request.setAttribute("end", end);
+				request.setAttribute("startDate", startDate);
+				request.setAttribute("startTime", startTime);
+				request.setAttribute("endDate", endDate);
+				request.setAttribute("endTime", endTime);
+				
 				request.setAttribute("ressources", ressourcesLibres);
 			} catch (ParseException e) {
-				e.printStackTrace();
-				request.setAttribute("problemeDate", true);
+				request.setAttribute("warning", "La date doit être au format 'yyyy-MM-dd' et l'heure au format 'HH:mm'");
+				setUpForm(request, response);
 			}
 
 		}
 
+	}
+	
+	private void setUpForm(HttpServletRequest request, HttpServletResponse response){
+		TypeRessourcePersistenceJPA typeRessourceManager = new TypeRessourcePersistenceJPA();
+		List<TypeRessourceEntity> typeressources = typeRessourceManager.loadAll();
+		request.setAttribute("formCreate", true);
+		request.setAttribute("typeRessources", typeressources);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

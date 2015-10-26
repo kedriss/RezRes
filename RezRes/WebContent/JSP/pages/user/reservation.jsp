@@ -14,7 +14,15 @@
 
 	<c:choose>
 		<c:when test="${formCreate}">
+
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+				<c:if test="${not empty warning}">
+					<div class="alert alert-warning">
+						<strong>Warning:</strong> ${warning}
+					</div>
+				</c:if>
+				
 				<h1>Que souhaitez vous?</h1>
 				<form action="/RezRes/user/reservation" method="post" role="form">
 					<div class="form-group">
@@ -37,8 +45,8 @@
 							name="endDate" value="" required>
 					</div>
 					<div class="form-group">
-						<label>Heure de Fin</label> <input type="time" class="form-control"
-							name="endTime" value="" required>
+						<label>Heure de Fin</label> <input type="time"
+							class="form-control" name="endTime" value="" required>
 					</div>
 					<button type="submit" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-ok"></span>
