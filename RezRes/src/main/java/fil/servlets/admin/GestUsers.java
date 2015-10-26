@@ -153,6 +153,7 @@ public class GestUsers extends AdminServlet {
 
 			utilisateur.setType(Integer.valueOf(type));
 			utilisateur.setNom(nom);
+			utilisateur.setId(null);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setMail(mail);
 			utilisateur.setLogin(login);

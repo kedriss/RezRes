@@ -53,7 +53,7 @@
 				<c:forEach items="${reservations}" var="reser">
 					<tr class="info">
 						<td>${reser.ressource.nom}</td>
-						<td>${reser.utilisateur.nom}${reser.utilisateur.prenom}</td>
+						<td>${reser.utilisateur.login}</td>
 						<td>${reser.dateDebut}</td>
 						<td>${reser.dateFin}</td>
 					</tr>
