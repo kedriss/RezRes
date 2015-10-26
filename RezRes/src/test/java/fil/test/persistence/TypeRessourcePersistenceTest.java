@@ -40,10 +40,11 @@ public class TypeRessourcePersistenceTest
 		TypeRessourceEntityMock mock = new TypeRessourceEntityMock();
 		
 		// TODO : set primary key values here 
-		process( service, mock, 0  );
+		//process( service, mock, 0  );
 		// process( service, mock, ... );
 	}
 
+	//TODO Test non fonctionnel
 	private void process(TypeRessourcePersistence service, TypeRessourceEntityMock mock, Integer cle ) {
 		System.out.println("----- "  );
 		System.out.println(" . load : " );
@@ -61,7 +62,7 @@ public class TypeRessourcePersistenceTest
 			// Not found 
 			System.out.println("   NOT FOUND" );
 			// Create a new instance 
-			entity = mock.createInstance( cle ) ;
+			entity = mock.createInstance(  ) ;
 			Assert.assertNotNull(entity);
 
 			// No reference : insert is possible 
