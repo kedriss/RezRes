@@ -8,14 +8,25 @@
 <div class="container-fluid">
 	<jsp:include page="/JSP/common/dash.jsp"></jsp:include>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<c:if test="${not empty warning}">
-			<div class="alert alert-warning">
-				<strong>Warning:</strong> ${warning}
+
+		<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
+
+		<c:if test="${modified}">
+			<div class="alert alert-success">
+				<strong>OK!</strong> Ressource modifiée.
 			</div>
 		</c:if>
+
+		<c:if test="${created}">
+			<div class="alert alert-success">
+				<strong>OK!</strong> Ressource crée.
+			</div>
+		</c:if>
+		
 		<c:choose>
 			<c:when test="${modification}">
 				<h2>Modification de la ressource : ${ressource.id}</h2>
+
 				<form action="<c:url value="/admin/ressources/modify"/>"
 					method="post" role="form">
 					<div class="form-group">
@@ -35,9 +46,12 @@
 							name="localite" value="${ressource.localite}" type="tel" required>
 					</div>
 					<div class="form-group">
-						<label>Responsable</label> <input type="number"
-							class="form-control" name="responsable"
-							value="${ressource.responsable}" required>
+						<label>Responsable</label> <select class="form-control"
+							name="responsable" required>
+							<c:forEach items="${Utilisateurs}" var="U">
+								<option value="${U.id}">${U.login}</option>
+							</c:forEach>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>Type</label><select name="type" class="form-control">
@@ -70,8 +84,8 @@
 							name="localite" value="${ressource.localite}" type="tel" required>
 					</div>
 					<div class="form-group">
-						<label>Responsable</label> <select type="number"
-							class="form-control" name="responsable" required>
+						<label>Responsable</label> <select class="form-control"
+							name="responsable" required>
 							<c:forEach items="${Utilisateurs}" var="U">
 								<option value="${U.id}">${U.login}</option>
 							</c:forEach>

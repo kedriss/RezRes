@@ -154,6 +154,8 @@ public class GestRessources extends AdminServlet {
 			TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 			List<TypeRessourceEntity> type_res = service.loadAll();
 			request.setAttribute("typeRessources", type_res);
+			List<UtilisateurEntity> users = new UtilisateurPersistenceJPA().loadAll();
+			request.setAttribute("Utilisateurs", users);
 			break;				
 		case "/create":
 			createRessource(request);

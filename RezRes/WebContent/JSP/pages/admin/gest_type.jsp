@@ -14,28 +14,24 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">${body}</h1>
-		<c:if test="${not empty warning}">
-			<div class="alert alert-warning">
-				<strong>Warning:</strong> 
-				${warning}
-			</div>
-		</c:if>
-		
+
+		<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
+
 		<h2>Rajouter un type ressource :</h2>
-		<form action="<c:url value="/admin/types/create"/>" class="form-inline"
-			role="form" method="post">
+		<form action="<c:url value="/admin/types/create"/>"
+			class="form-inline" role="form" method="post">
 			<label>Nom du type :</label> <input class="form-control" type="nom"
 				name="nom">
 			<button type="submit" class="btn btn-default">Créer</button>
 		</form>
-		
+
 		<c:if test="${mod_form == true}">
 			<hr>
-			<form action="<c:url value="/admin/types/modify"/>" class="form-inline"
-				role="form" method="post">
-				<label>Nouveau nom :</label>
-				 <input class="form-control" type="nom" name="nom" value="${old_name}">
-				 <input value="${old_cle}" type="hidden" name="cle">
+			<form action="<c:url value="/admin/types/modify"/>"
+				class="form-inline" role="form" method="post">
+				<label>Nouveau nom :</label> <input class="form-control" type="nom"
+					name="nom" value="${old_name}"> <input value="${old_cle}"
+					type="hidden" name="cle">
 				<button type="submit" class="btn btn-default">MODIFIER</button>
 			</form>
 		</c:if>
@@ -54,8 +50,8 @@
 						<td>${tres.cle}</td>
 						<td>${tres.libelle}</td>
 						<td>
-							<form action="<c:url value="/admin/types/modify"/>" class="form-inline"
-								role="form" method="post">
+							<form action="<c:url value="/admin/types/modify"/>"
+								class="form-inline" role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
 								<button type="submit" class="btn btn-default btn-sm">
 									<span class="glyphicon glyphicon-pencil"></span> Modifier
@@ -63,8 +59,8 @@
 							</form>
 						</td>
 						<td>
-							<form action="<c:url value="/admin/types/delete"/>" class="form-inline"
-								role="form" method="post">
+							<form action="<c:url value="/admin/types/delete"/>"
+								class="form-inline" role="form" method="post">
 								<input value="${tres.cle}" type="hidden" name="cle">
 								<button type="submit" class="btn btn-default btn-sm">
 									<span class="glyphicon glyphicon-remove"></span> Supprimer

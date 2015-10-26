@@ -17,12 +17,8 @@
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<c:if test="${not empty warning}">
-					<div class="alert alert-warning">
-						<strong>Warning:</strong> ${warning}
-					</div>
-				</c:if>
-				
+				<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
+
 				<h1>Que souhaitez vous?</h1>
 				<form action="/RezRes/user/reservation" method="post" role="form">
 					<div class="form-group">
@@ -57,6 +53,13 @@
 
 		<c:otherwise>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+				<c:if test="${created}">
+					<div class="alert alert-success">
+						<strong>OK!</strong> Réservation crée.
+					</div>
+				</c:if>
+				
 				<h1>Selectionner la ressource à réserver</h1>
 				<table class="table tact">
 					<thead>
@@ -82,8 +85,10 @@
 									<form action="/RezRes/user/reservation/create"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id"> <input
-											value="${start}" type="hidden" name="start"> <input
-											value="${end}" type="hidden" name="end">
+											value="${startDate}" type="hidden" name="startDate">
+										<input value="${startTime}" type="hidden" name="startTime">
+										<input value="${endDate}" type="hidden" name="endDate">
+										<input value="${endTime}" type="hidden" name="endTime">
 										<button type="submit" class="btn btn-default btn-sm">
 											<span class="glyphicon glyphicon-ok"></span>
 										</button>

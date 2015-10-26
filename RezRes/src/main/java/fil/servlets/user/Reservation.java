@@ -37,7 +37,9 @@ public class Reservation extends UserServlet {
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		super.handleRequest(request, response);
-		logger.info(" Test : arrvivé dans la servlet reservation");
+		
+		logger.info("Arrivée dans la servlet reservation");
+		
 		String pathInfo = request.getPathInfo();
 		String target = "/JSP/pages/user/panorama.jsp";
 		switch (pathInfo + "") {
@@ -82,14 +84,14 @@ public class Reservation extends UserServlet {
 		String endDate = request.getParameter("endDate");
 		String endTime = request.getParameter("endTime");
 
-		if (startDate == null || startTime == null || endDate == null || endTime == null) {
+		if (startDate == null || startTime == null || endDate == null || endTime == null) {			
 			request.setAttribute("warning", "Tous les champs doivent être saisies");
 		}
 		else{
 			try {
 				Date startDateTime = dateParser.parse(startDate + " " + startTime);
 				Date endDateTime = dateParser.parse(endDate + " " + endTime);
-				
+								
 				ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
 				ReservationEntity reservation = new ReservationEntity();
 				reservation.setDateDebut(startDateTime);
@@ -100,6 +102,8 @@ public class Reservation extends UserServlet {
 
 				reservationManager.save(reservation);
 
+				request.setAttribute("created", true);
+				
 			} catch (ParseException e) {
 				request.setAttribute("warning", "La date doit être au format 'yyyy-MM-dd' et l'heure au format 'HH:mm'");
 			}
