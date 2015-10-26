@@ -31,110 +31,114 @@ import fil.servlets.UserServlet;
 @WebServlet("/user/reservation/*")
 public class Reservation extends UserServlet {
 	private static final long serialVersionUID = -7239735635468259205L;
-	private static final SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private static Logger logger = Logger.getLogger(Reservation.class);
-	
-	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		super.handleRequest(request, response);
 		logger.info(" Test : arrvivé dans la servlet reservation");
-		String pathInfo= request.getPathInfo();
-		String target="/JSP/pages/user/panorama.jsp";
-		switch (pathInfo+""){
-	
+		String pathInfo = request.getPathInfo();
+		String target = "/JSP/pages/user/panorama.jsp";
+		switch (pathInfo + "") {
+
 		case "/delete":
 			deleteAction(request, response);
-			 response.sendRedirect("/RezRes/user");
-			break; 
+			response.sendRedirect("/RezRes/user");
+			break;
 		case "/create":
 			createAction(request, response);
-			 response.sendRedirect("/RezRes/user");
+			response.sendRedirect("/RezRes/user");
 			break;
-		default: 
+		default:
 			formAction(request, response);
-			 target = "/JSP/pages/user/reservation.jsp";
+			target = "/JSP/pages/user/reservation.jsp";
 			break;
 		}
 
 		request.setAttribute("title", "RezRes - Reservation");
 		request.setAttribute("body", "Réserver");
 		request.setAttribute("menu_entry", 1);
-		
+
 		RequestDispatcher rd;
 		ServletContext context = this.getServletContext();
 		rd = context.getRequestDispatcher(target);
-		try
-		{
-			
-			rd.forward(request, response);
-		} 
-		catch (IllegalStateException e) {}
-	}
-	
-	
+		try {
 
-	private void createAction(HttpServletRequest request,HttpServletResponse response) {
-		
+			rd.forward(request, response);
+		} catch (IllegalStateException e) {
+		}
+	}
+
+	private void createAction(HttpServletRequest request, HttpServletResponse response) {
+
 		int idRessource = Integer.valueOf(request.getParameter("id"));
 		RessourcePersistenceJPA ressourceMananger = new RessourcePersistenceJPA();
-		UtilisateurPersistenceJPA utilisateurManager = new UtilisateurPersistenceJPA();
+		
 		HttpSession session = request.getSession();
 		
-		try {
-			Date debut = dateParser.parse(request.getParameter("start"));
-			Date fin   = dateParser.parse(request.getParameter("end"));
-			ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
-			ReservationEntity reservation = new ReservationEntity();
-			reservation.setDateDebut(debut);
-			reservation.setDateFin(fin);
-			reservation.setRessource(ressourceMananger.load(idRessource));
-			UtilisateurEntity user = (UtilisateurEntity)session.getAttribute("utilisateurConnecte");
-			reservation.setUtilisateur(user);
-			
-			reservationManager.save(reservation);
-		
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String startDate = request.getParameter("startDate");
+		String startTime = request.getParameter("startTime");
+		String endDate = request.getParameter("endDate");
+		String endTime = request.getParameter("endTime");
+
+		if (startDate != null && startTime != null && endDate != null && endTime != null) {
+			try {
+				Date startDateTime = dateParser.parse(startDate + " " + startTime);
+				Date endDateTime = dateParser.parse(endDate + " " + endTime);
+				
+				ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
+				ReservationEntity reservation = new ReservationEntity();
+				reservation.setDateDebut(startDateTime);
+				reservation.setDateFin(endDateTime);
+				reservation.setRessource(ressourceMananger.load(idRessource));
+				UtilisateurEntity user = (UtilisateurEntity) session.getAttribute("utilisateurConnecte");
+				reservation.setUtilisateur(user);
+
+				reservationManager.save(reservation);
+
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-	private void deleteAction(HttpServletRequest request,
-			HttpServletResponse response) {
+	private void deleteAction(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		
-		if(id!=null){
+
+		if (id != null) {
 			ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
 			reservationManager.delete(Integer.valueOf(id));
-			request.setAttribute("suppresion", true);	
-		}	
+			request.setAttribute("suppresion", true);
+		}
 	}
 
-	private void formAction(HttpServletRequest request,HttpServletResponse response) {
+	private void formAction(HttpServletRequest request, HttpServletResponse response) {
 		String typeressource = request.getParameter("type");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
-		
-		
+
 		// On arrive sur le formulaire vide
-		if(typeressource == null){
-			TypeRessourcePersistenceJPA 	typeRessourceManager 	= new TypeRessourcePersistenceJPA();
-			List<TypeRessourceEntity> 		typeressources 			= typeRessourceManager.loadAll();
+		if (typeressource == null) {
+			TypeRessourcePersistenceJPA typeRessourceManager = new TypeRessourcePersistenceJPA();
+			List<TypeRessourceEntity> typeressources = typeRessourceManager.loadAll();
 			request.setAttribute("formCreate", true);
 			request.setAttribute("typeRessources", typeressources);
-		} 
-		else {
+		} else {
 			try {
 				Date debut = dateParser.parse(request.getParameter("start"));
-				Date fin   = dateParser.parse(request.getParameter("end"));
-				Map<String,Object>  criters = new HashMap<String, Object>();
-				
+				Date fin = dateParser.parse(request.getParameter("end"));
+				Map<String, Object> criters = new HashMap<String, Object>();
+
 				criters.put("type", Integer.valueOf(typeressource));
 				criters.put("date_debut", debut);
 				criters.put("date_fin", fin);
-				RessourcePersistenceJPA	ressourceManager 	= new RessourcePersistenceJPA();
-				List<RessourceEntity> ressourcesLibres = ressourceManager.loadByNamedQuery("RessourceEntity.getFreeRessource", criters);
-			
+				RessourcePersistenceJPA ressourceManager = new RessourcePersistenceJPA();
+				List<RessourceEntity> ressourcesLibres = ressourceManager
+						.loadByNamedQuery("RessourceEntity.getFreeRessource", criters);
+
 				request.setAttribute("start", start);
 				request.setAttribute("end", end);
 				request.setAttribute("ressources", ressourcesLibres);
@@ -143,16 +147,17 @@ public class Reservation extends UserServlet {
 				request.setAttribute("problemeDate", true);
 			}
 
-			
 		}
-		
+
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		handleRequest(request, response);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		handleRequest(request, response);
 	}
 }

@@ -16,14 +16,23 @@
 		<h1 class="page-header">${body}</h1>
 
 
-		<form action="<c:url value="/admin/filter"/>" method="post" role="form"">
+		<form action="<c:url value="/admin/filter"/>" method="post"
+			role="form">
 			<div class="form-group">
 				<label>Date de début</label> <input type="date" class="form-control"
-					name="start" value="" required>
+					name="startDate" value="" required>
 			</div>
 			<div class="form-group">
-				<label>Date de début</label> <input type="date" class="form-control"
-					name="end" value="" required>
+				<label>Heure de début</label> <input type="time"
+					class="form-control" name="startTime" value="" required>
+			</div>
+			<div class="form-group">
+				<label>Date de Fin</label> <input type="date" class="form-control"
+					name="endDate" value="" required>
+			</div>
+			<div class="form-group">
+				<label>Heure de Fin</label> <input type="time" class="form-control"
+					name="endTime" value="" required>
 			</div>
 			<button type="submit" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-search"></span>

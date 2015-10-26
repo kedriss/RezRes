@@ -25,7 +25,7 @@ public class PanoramaAdmin extends AdminServlet {
 	private static final long serialVersionUID = -5112025367936813560L;
 	private static String JSP_RESER_PATH = "/JSP/pages/admin/panorama.jsp";
 	
-	private static SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	private void getAllRessources(HttpServletRequest request){
 		List<ReservationEntity> reservations = new ReservationPersistenceJPA().loadAll();
@@ -36,17 +36,21 @@ public class PanoramaAdmin extends AdminServlet {
 	//TODO Exceptions?
 	private void getRessourcesFromDates(HttpServletRequest request) throws ParseException{
 		
-		String tmp = request.getParameter("start");
-		if(tmp != null)
+		String startDate = request.getParameter("startDate");
+		String startTime = request.getParameter("startTime");
+		String endDate = request.getParameter("endDate");
+		String endTime = request.getParameter("endTime");
+		
+		if(startDate != null && startTime != null && endDate != null && endTime != null)
 		{
-			Date startDate = dateParser.parse(tmp);
-			Date endDate = dateParser.parse(request.getParameter("end"));
+			Date startDateTime = dateParser.parse(startDate + " " + startTime);
+			Date endDateTime = dateParser.parse(endDate + " " + endTime);
 			
 			ReservationPersistence reservationService = new ReservationPersistenceJPA();
 			
 			Map<String, Object> queryParameters = new HashMap<>();
-			queryParameters.put("start", startDate);
-			queryParameters.put("end", endDate);
+			queryParameters.put("start", startDateTime);
+			queryParameters.put("end", endDateTime);
 			
 			List<ReservationEntity> reservations = reservationService.loadByNamedQuery("ReservationEntity.filterDates", queryParameters);
 			
