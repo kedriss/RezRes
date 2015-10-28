@@ -36,12 +36,6 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/user"/>">Panorama</a></li>
-
-				<li><a href="<c:url value="/user/reservation"/>">Réserver</a></li>
-				<!-- TODO: Utiliser JSTL pour créer le lien. -->
-			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<li><p class="navbar-btn"><a role="button" class="btn btn-success" href="/RezRes/login">Login</a></p></li>
