@@ -27,7 +27,7 @@ public class PanoramaUser extends UserServlet
 	{
 		super.handleRequest(request, response);
 		
-		String target = "/JSP/pages/user/panorama.jsp";
+		String target = "/JSP/pages/user/panorama_user.jsp";
 		request.setAttribute("title", "RezRes - Utilisateur");
 		request.setAttribute("body", "Panorama");
 		request.setAttribute("menu_entry", 0);

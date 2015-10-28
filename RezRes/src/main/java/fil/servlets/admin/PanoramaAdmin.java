@@ -23,7 +23,7 @@ import fil.servlets.AdminServlet;
 @WebServlet("/admin/*")
 public class PanoramaAdmin extends AdminServlet {
 	private static final long serialVersionUID = -5112025367936813560L;
-	private static String JSP_RESER_PATH = "/JSP/pages/admin/panorama.jsp";
+	private static String JSP_RESER_PATH = "/JSP/pages/admin/panorama_admin.jsp";
 
 	private static SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
