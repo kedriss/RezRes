@@ -64,7 +64,6 @@ public class GestTypeRessources extends AdminServlet {
 				TypeRessourceEntity new_type_res = service.load(cle);
 				new_type_res.setLibelle(nom);
 				service.save(new_type_res);
-				Messages.TypeRessourceModified.setMessage(request);
 			}
 			else if( (nom == null || nom == "") && cle != null)
 			{
@@ -98,7 +97,6 @@ public class GestTypeRessources extends AdminServlet {
 			TypeRessourceEntity new_type_res = new TypeRessourceEntity();
 			new_type_res.setLibelle(nom);
 			service.insert(new_type_res);
-			Messages.TypeRessourceCreated.setMessage(request);
 		} 
 		else
 		{

@@ -40,10 +40,7 @@ public class GestRessources extends AdminServlet {
 		List<RessourceEntity> reservations = res_serv.loadByNamedQuery("ReservationEntity.getAllByRessource", queryParameters);
 		
 		if(reservations == null || (reservations != null && reservations.isEmpty()))
-		{	
 			ressourceService.delete(id);
-			Messages.RESSOURCEDELETED.setMessage(request);
-		}
 		else
 			Messages.RESSOURCEDELETEDENIED.setMessage(request);
 	}
