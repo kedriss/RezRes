@@ -17,6 +17,8 @@ import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 import fil.servlets.AdminServlet;
+import fil.util.Messages;
+
 
 
 @WebServlet("/admin/users/*")
@@ -111,7 +113,7 @@ public class GestUsers extends AdminServlet {
 
 			UtilisateurManager.save(utilisateur);
 
-			request.setAttribute("modifOK", true);
+			Messages.USERMODIFIED.setMessage(request);
 			Pano_action(request);
 			request.setAttribute("pano", "active");
 		}
@@ -130,7 +132,6 @@ public class GestUsers extends AdminServlet {
 	 */
 	private void CreateAction(HttpServletRequest request) 
 	{
-		System.out.println("create mode");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String mail = request.getParameter("mail");
@@ -144,12 +145,7 @@ public class GestUsers extends AdminServlet {
 		map.put("login", login);
 		List<UtilisateurEntity> dejaExistant = UtilisateurManager.search(map);//("UtilisateurEntity.selectLogin", map);
 		if(dejaExistant.isEmpty()){
-
-
 			UtilisateurEntity utilisateur = new UtilisateurEntity();
-
-
-			System.out.println(nom+"/"+prenom+"/"+mail+"/"+login+"/"+pwd+"/"+telephone);
 
 			utilisateur.setType(Integer.valueOf(type));
 			utilisateur.setNom(nom);
@@ -160,12 +156,12 @@ public class GestUsers extends AdminServlet {
 			utilisateur.setPwd(hashedPwd);
 			utilisateur.setTelephone(telephone);
 			UtilisateurManager.insert(utilisateur);
-			request.setAttribute("loginCreer",true);
-		}
+			
+			Messages.USERCREATED.setMessage(request);
+			}
 		else
 		{
-			System.out.println(dejaExistant.size()+" est deja existant");
-			request.setAttribute("loginExistant",true);
+			Messages.USERCREATIONDENIED.setMessage(request);
 		}
 	}
 
@@ -183,7 +179,7 @@ public class GestUsers extends AdminServlet {
 		if(res == null || (res != null && res.isEmpty()))
 			UtilisateurManager.delete(id);
 		else
-			request.setAttribute("warning", "Impossible de supprimer l'utilisateur : des réservations y sont associées.");
+			Messages.USERDELETEDENIED.setMessage(request);
 	}
 
 	public void Pano_action(HttpServletRequest request)

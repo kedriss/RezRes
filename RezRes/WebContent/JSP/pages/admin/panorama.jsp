@@ -15,7 +15,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">${body}</h1>
 
-		<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
+		<jsp:include page="/JSP/common/message.jsp"></jsp:include>
 		
 		<form action="<c:url value="/admin/filter"/>" method="post"
 			role="form">

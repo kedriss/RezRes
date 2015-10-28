@@ -27,6 +27,7 @@ import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 import fil.servlets.UserServlet;
+import fil.util.Messages;
 
 @WebServlet("/user/reservation/*")
 public class Reservation extends UserServlet {
@@ -85,7 +86,7 @@ public class Reservation extends UserServlet {
 		String endTime = request.getParameter("endTime");
 
 		if (startDate == null || startTime == null || endDate == null || endTime == null) {			
-			request.setAttribute("warning", "Tous les champs doivent être saisies");
+		Messages.InputsEmpty.setMessage(request);	 
 		}
 		else{
 			try {
@@ -105,7 +106,7 @@ public class Reservation extends UserServlet {
 				request.setAttribute("created", true);
 				
 			} catch (ParseException e) {
-				request.setAttribute("warning", "La date doit être au format 'yyyy-MM-dd' et l'heure au format 'HH:mm'");
+				Messages.BadDateFormat.setMessage(request);
 			}
 		}
 
@@ -117,7 +118,7 @@ public class Reservation extends UserServlet {
 		if (id != null) {
 			ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
 			reservationManager.delete(Integer.valueOf(id));
-			request.setAttribute("suppresion", true);
+			Messages.RESSOURCEDELETED.setMessage(request);
 		}
 	}
 
@@ -152,7 +153,7 @@ public class Reservation extends UserServlet {
 				
 				request.setAttribute("ressources", ressourcesLibres);
 			} catch (ParseException e) {
-				request.setAttribute("warning", "La date doit être au format 'yyyy-MM-dd' et l'heure au format 'HH:mm'");
+				Messages.BadDateFormat.setMessage(request);
 				setUpForm(request, response);
 			}
 

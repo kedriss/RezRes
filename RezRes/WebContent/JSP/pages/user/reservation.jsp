@@ -12,12 +12,12 @@
 <div class="container-fluid">
 	<jsp:include page="/JSP/common/dash.jsp"></jsp:include>
 
+	<jsp:include page="/JSP/common/message.jsp"></jsp:include>
 	<c:choose>
 		<c:when test="${formCreate}">
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
 
 				<h1>Que souhaitez vous?</h1>
 				<form action="/RezRes/user/reservation" method="post" role="form">
@@ -53,12 +53,6 @@
 
 		<c:otherwise>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-				<c:if test="${created}">
-					<div class="alert alert-success">
-						<strong>OK!</strong> Réservation crée.
-					</div>
-				</c:if>
 				
 				<h1>Selectionner la ressource à réserver</h1>
 				<table class="table tact">

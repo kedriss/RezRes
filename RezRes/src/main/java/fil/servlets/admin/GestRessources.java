@@ -21,6 +21,7 @@ import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 import fil.servlets.AdminServlet;
+import fil.util.Messages;
 
 @WebServlet("/admin/ressources/*")
 public class GestRessources extends AdminServlet {
@@ -39,9 +40,12 @@ public class GestRessources extends AdminServlet {
 		List<RessourceEntity> reservations = res_serv.loadByNamedQuery("ReservationEntity.getAllByRessource", queryParameters);
 		
 		if(reservations == null || (reservations != null && reservations.isEmpty()))
+		{	
 			ressourceService.delete(id);
+			Messages.RESSOURCEDELETED.setMessage(request);
+		}
 		else
-			request.setAttribute("warning", "Impossible de supprimer la ressource : des réservations y sont associées.");
+			Messages.RESSOURCEDELETEDENIED.setMessage(request);
 	}
 	
 	//TODO Tester si attribut non null pour ceux nécessaire
@@ -73,7 +77,7 @@ public class GestRessources extends AdminServlet {
 		
 		ressourceService.save(updating);
 			
-		request.setAttribute("modified", true);
+		Messages.RESSOURCEMODIFIED.setMessage(request);
 		getAllRessources(request);
 		//request.setAttribute("", "active");
 	}
@@ -106,7 +110,7 @@ public class GestRessources extends AdminServlet {
 		
 		ressourceService.save(creating);
 			
-		request.setAttribute("created", true);
+		Messages.RESSOURCECREATED.setMessage(request);
 		getAllRessources(request);	
 	}
 	
