@@ -6,7 +6,7 @@
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
 			<li><h3>Utilistateur :</h3></li>
-			<li <c:if test="${menu_entry == 0}" >class="active"</c:if>><a href="<c:url value="/user"/>">Panorama</a></li>
+			<li <c:if test="${menu_entry == 0}" >class="active"</c:if>><a href="<c:url value="/user"/>">Mes réservations</a></li>
 			<li <c:if test="${menu_entry == 1}" >class="active"</c:if>><a href="<c:url value="/user/reservation"/>">Réserver</a></li>
 		</ul>
 		<c:if test="${admin==true }">
