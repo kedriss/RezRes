@@ -14,14 +14,16 @@ public enum Messages {
 		USERMODIFIED		("<strong>OK!</strong> utilisateur modifiée.","success"),
 		// RESSOURCE
 		RESSOURCECREATED 	("<strong>OK!</strong> Ressource créée.","success"),
-		RESSOURCEDELETED 	("<strong>OK!</strong> Ressource créée.","success"),
-		RESSOURCEDELETEDENIED("Impossible de supprimer la ressource : des réservations y sont associées.","warning"),
+		RESSOURCEDELETED 	("<strong>OK!</strong> Ressource supprimée.","success"),
+		RESSOURCEDELETEDENIED("<strong>Refusé!</strong> des réservations sont associées à cette ressource.","warning"),
 		RESSOURCEMODIFIED	("<strong>OK!</strong> Ressource modifiée.","success"),
 		//TYPERESSOURCE 
-		TypeRessourceModifyDeniedID		("Impossible de modifié : pas de clef précisé.","warning"),
-		BADTypeRessource				("Vous n'avez pas précisé de type.","warning"),
-		TypeRessourceCreationDeniedName	("Impossible de créer le type demandé : pas de nom.","warning"),
-		TypeRessourceDeleteDenied  		("Impossible de supprimer le type : des ressources y sont associées.","warning"),
+		TypeRessourceModifyDeniedID		("<strong>Refusé!</strong>Impossible de modifié : pas de clef précisé.","warning"),
+		BADTypeRessource				("<strong>Refusé!</strong>Vous n'avez pas précisé de type.","warning"),
+		TypeRessourceCreationDeniedName	("<strong>Refusé!</strong>Impossible de créer le type demandé : pas de nom.","warning"),
+		TypeRessourceDeleteDenied  		("<strong>Refusé!</strong> Des ressources sont associées à ce type.","warning"),
+		TypeRessourceCreated 			("<strong>OK!</strong> Type ajouté.","success"),
+		TypeRessourceModified			("<strong>OK!</strong> Type modifié.","success"),
 		
 		
 		
