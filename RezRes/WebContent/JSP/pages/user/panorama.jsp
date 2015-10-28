@@ -28,8 +28,8 @@
 					<tr class="info">
 						<td>${reser.ressource.nom}</td>
 						<td>${reser.utilisateur.nom}${reser.utilisateur.prenom}</td>
-						<td>${reser.dateDebut}</td>
-						<td>${reser.dateFin}</td>
+						<td><fmt:formatDate value="${reser.dateDebut}" pattern="yyyy-MM-dd HH:mm" /></td>
+						<td><fmt:formatDate value="${reser.dateFin}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
 							<form action="/RezRes/user/reservation/delete"
 								class="form-inline" role="form" method="post">
