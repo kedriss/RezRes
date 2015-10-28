@@ -9,20 +9,8 @@
 	<jsp:include page="/JSP/common/dash.jsp"></jsp:include>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-		<jsp:include page="/JSP/common/warning.jsp"></jsp:include>
+		<jsp:include page="/JSP/common/message.jsp"></jsp:include>
 
-		<c:if test="${modified}">
-			<div class="alert alert-success">
-				<strong>OK!</strong> Ressource modifiée.
-			</div>
-		</c:if>
-
-		<c:if test="${created}">
-			<div class="alert alert-success">
-				<strong>OK!</strong> Ressource crée.
-			</div>
-		</c:if>
-		
 		<c:choose>
 			<c:when test="${modification}">
 				<h2>Modification de la ressource : ${ressource.id}</h2>

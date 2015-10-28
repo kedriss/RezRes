@@ -18,6 +18,7 @@ import fil.bean.jpa.TypeRessourceEntity;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.servlets.AdminServlet;
+import fil.util.Messages;
 
 @WebServlet("/admin/types/*")
 public class GestTypeRessources extends AdminServlet {
@@ -73,12 +74,12 @@ public class GestTypeRessources extends AdminServlet {
 			}
 			else
 			{
-				request.setAttribute("warning", "Impossible de modifié : pas de clef précisé.");
+				Messages.TypeRessourceModifyDeniedID.setMessage(request);
 			}
 		}
 		catch (NumberFormatException e)
 		{
-			request.setAttribute("warning", "Vous n'avez pas précisé de type à supprimer.");
+			 Messages.BADTypeRessource.setMessage(request);
 			this.showAction(request, response);
 		}
 		finally
@@ -99,7 +100,7 @@ public class GestTypeRessources extends AdminServlet {
 		} 
 		else
 		{
-			request.setAttribute("warning", "Impossible de créer le type demandé : pas de nom.");
+			Messages.TypeRessourceCreationDeniedName.setMessage(request);
 		}
 		this.showAction(request, response);
 	}
@@ -122,14 +123,14 @@ public class GestTypeRessources extends AdminServlet {
 				if(reservations == null || (reservations != null && reservations.isEmpty()))
 					service.delete(cle);
 				else
-					request.setAttribute("warning", "Impossible de supprimer le type : des ressources y sont associées.");
+					Messages.TypeRessourceDeleteDenied.setMessage(request);
 			}
 			this.showAction(request, response);
 		}
 		catch (NumberFormatException e)
 		{
-			request.setAttribute("warning", "Vous n'avez pas précisé de type à supprimer.");
-			this.showAction(request, response);
+			 Messages.BADTypeRessource.setMessage(request);
+				this.showAction(request, response);
 		}
 	}
 

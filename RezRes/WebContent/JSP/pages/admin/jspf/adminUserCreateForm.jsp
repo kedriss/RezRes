@@ -9,16 +9,6 @@
 
 <div id="create" class="tab-pane ${create}" aria-expanded="false">
 						<!--  Creation d'un utilisateur -->
-						<c:if test="${loginExistant==true}">
-							<div class="alert alert-danger">
-								<strong>Refusé!</strong> Ce login est déjà pris.
-							</div>
-						</c:if>
-						<c:if test="${loginCreer==true}">
-							<div class="alert alert-success">
-								<strong>OK!</strong> Utilisateur correctement créé.
-							</div>
-						</c:if>
 						<form action="<c:url value="/admin/users/create"/>" method="post"
 							role="form">
 							<div class="form-group">
