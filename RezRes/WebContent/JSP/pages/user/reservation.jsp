@@ -17,9 +17,6 @@
 	<c:choose>
 		<c:when test="${formCreate}">
 
-			
-
-
 				<h1>Que souhaitez vous?</h1>
 				<form action="/RezRes/user/reservation" method="post" role="form">
 					<div class="form-group">
@@ -91,13 +88,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
-				<form action="/RezRes/admin/ressources/create/form"
-					class="form-inline" role="form" method="post">
-					<button type="submit" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
-					</button>
-				</form>
 			
 		</c:otherwise>
 	</c:choose>

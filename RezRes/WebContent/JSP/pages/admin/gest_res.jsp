@@ -94,10 +94,9 @@
 
 			<c:otherwise>
 				<h1 class="page-header">${body}</h1>
-				<table class="table tact">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>Id</th>
 							<th>Nom</th>
 							<th>Description</th>
 							<th>Localité</th>
@@ -108,7 +107,6 @@
 					<tbody>
 						<c:forEach items="${ressources}" var="res">
 							<tr class="info">
-								<td>${res.id}</td>
 								<td>${res.nom}</td>
 								<td>${res.description}</td>
 								<td>${res.localite}</td>
@@ -119,14 +117,16 @@
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id">
 										<button type="submit" class="btn btn-default btn-sm">
-											<span class="glyphicon glyphicon-pencil"></span>
+											<span class="glyphicon glyphicon-pencil"></span> Modifier
 										</button>
 									</form>
+								</td>
+								<td>
 									<form action="<c:url value="/admin/ressources/delete"/>"
 										class="form-inline" role="form" method="post">
 										<input value="${res.id}" type="hidden" name="id">
 										<button type="submit" class="btn btn-default btn-sm">
-											<span class="glyphicon glyphicon-trash"></span>
+											<span class="glyphicon glyphicon-remove"></span> Supprimer
 										</button>
 									</form>
 								</td>
