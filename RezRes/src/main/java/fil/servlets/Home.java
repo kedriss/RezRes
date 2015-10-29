@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import fil.bean.jpa.ReservationEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
 
-@WebServlet("/")
+@WebServlet("")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = -594667926099562461L;
 	
