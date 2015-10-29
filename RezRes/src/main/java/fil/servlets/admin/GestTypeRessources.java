@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.RessourceEntity;
 import fil.bean.jpa.TypeRessourceEntity;
+import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
 import fil.servlets.AdminServlet;
@@ -114,17 +116,37 @@ public class GestTypeRessources extends AdminServlet {
 			Integer cle = Integer.parseInt(param);
 			if(cle != null)
 			{
+				
+				// verification de ressources associées
 				TypeRessourcePersistenceJPA service = new TypeRessourcePersistenceJPA();
 				
 				RessourcePersistenceJPA res_serv = new RessourcePersistenceJPA();
 				Map<String, Object> queryParameters = new HashMap<String, Object>();
 				queryParameters.put("id", cle);
-				List<RessourceEntity> reservations = res_serv.loadByNamedQuery("RessourceEntity.getByType", queryParameters);
+				List<RessourceEntity> ressources = res_serv.loadByNamedQuery("RessourceEntity.getByType", queryParameters);
 				
-				if(reservations == null || (reservations != null && reservations.isEmpty()))
+				if(ressources == null || (ressources != null && ressources.isEmpty()))
+					{
 					service.delete(cle);
-				else
-					Messages.TypeRessourceDeleteDenied.setMessage(request);
+					}
+				else{
+					
+					ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
+					Map<String, Object> criters = new HashMap<String, Object>();
+					criters.put("type", new TypeRessourcePersistenceJPA().load(Integer.valueOf(cle)));
+					
+					List<ReservationEntity> reservations = reservationManager.loadByNamedQuery("RessourceEntity.checkRemoveType", criters);
+					System.out.println(ressources);
+					
+					if(reservations == null || (reservations != null && reservations.isEmpty())){
+						System.out.println("on peut supprimer les ressources");
+						deleteCascade(cle);
+					}
+					else{
+						Messages.TypeRessourceDeleteDenied.setMessage(request);
+					}
+				}
+					
 			}
 			this.showAction(request, response);
 		}
@@ -133,6 +155,21 @@ public class GestTypeRessources extends AdminServlet {
 			 Messages.BADTypeRessource.setMessage(request);
 				this.showAction(request, response);
 		}
+	}
+
+	private void deleteCascade(Integer cle) {
+		RessourcePersistenceJPA 		ressourceManager 		= new RessourcePersistenceJPA();
+		TypeRessourcePersistenceJPA  	typeRessourceManager 	= new TypeRessourcePersistenceJPA();
+		Map<String, Object> criteria = new HashMap<String, Object>();
+		criteria.put("id", cle);
+		List<RessourceEntity> ressources = ressourceManager.loadByNamedQuery("RessourceEntity.getByType", criteria) ;
+		for(RessourceEntity entity : ressources){
+		
+		ressourceManager.delete(entity);
+		
+		}
+		
+		typeRessourceManager.delete(Integer.valueOf(cle));
 	}
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

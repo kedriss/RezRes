@@ -38,7 +38,14 @@
 										<td>${U.login}</td>
 										<td>${U.mail}</td>
 										<td>${U.telephone}</td>
-										<td>${U.type}</td>
+										<td>
+										<c:if test="${U.type==0}">
+											Utilisateur classique
+										</c:if>
+										<c:if test="${U.type==1}">
+											Administrateur
+										</c:if>
+										</td>
 										<td><form action="<c:url value="/admin/users/modify"/>"
 												class="form-inline" role="form" method="post">
 												<input name="id" type="hidden" value="${U.id}" />
@@ -62,3 +69,4 @@
 						</table>
 						<!--  Fin de zone d'afichage du panorama des Utilisateurs -->
 					</div>
+					

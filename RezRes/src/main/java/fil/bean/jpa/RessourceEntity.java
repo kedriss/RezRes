@@ -31,7 +31,8 @@ import javax.persistence.*;
 				+ " AND NOT EXISTS (SELECT 1 FROM ReservationEntity y WHERE y.ressource = x "
 				+ " AND (:date_debut BETWEEN y.dateDebut and y.dateFin OR :date_fin BETWEEN y.dateDebut and y.dateFin"
 				+ " OR y.dateDebut BETWEEN :date_debut and :date_fin  OR y.dateFin BETWEEN :date_debut and :date_fin))" ),
-  @NamedQuery ( name="RessourceEntity.getByType", query="SELECT r FROM RessourceEntity r WHERE r.typeRessource.cle = :id" )
+  @NamedQuery ( name="RessourceEntity.getByType", query="SELECT r FROM RessourceEntity r WHERE r.typeRessource.cle = :id" ),
+  @NamedQuery ( name="RessourceEntity.checkRemoveType", query="SELECT x FROM ReservationEntity x where x.ressource in( select y from RessourceEntity y where y.typeRessource=:type)" )
 } )
 public class RessourceEntity implements Serializable {
 
