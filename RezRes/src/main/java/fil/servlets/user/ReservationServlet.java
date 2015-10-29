@@ -25,7 +25,6 @@ import fil.bean.jpa.UtilisateurEntity;
 import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
 import fil.persistence.services.jpa.TypeRessourcePersistenceJPA;
-import fil.persistence.services.jpa.UtilisateurPersistenceJPA;
 import fil.servlets.UserServlet;
 import fil.util.Messages;
 

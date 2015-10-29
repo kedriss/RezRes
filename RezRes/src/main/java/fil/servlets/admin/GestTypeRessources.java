@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fil.bean.jpa.ReservationEntity;
 import fil.bean.jpa.RessourceEntity;
 import fil.bean.jpa.TypeRessourceEntity;
 import fil.persistence.services.jpa.RessourcePersistenceJPA;
