@@ -19,7 +19,7 @@ import fil.persistence.services.jpa.ReservationPersistenceJPA;
 import fil.servlets.UserServlet;
 
 @WebServlet("/user")
-public class PanoramaUser extends UserServlet 
+public class PanoramaUserServlet extends UserServlet 
 {
 	private static final long serialVersionUID = 749223966274794536L;
 

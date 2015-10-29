@@ -30,10 +30,10 @@ import fil.servlets.UserServlet;
 import fil.util.Messages;
 
 @WebServlet("/user/reservation/*")
-public class Reservation extends UserServlet {
+public class ReservationServlet extends UserServlet {
 	private static final long serialVersionUID = -7239735635468259205L;
 	private static final SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	private static Logger logger = Logger.getLogger(Reservation.class);
+	private static Logger logger = Logger.getLogger(ReservationServlet.class);
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
