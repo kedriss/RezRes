@@ -29,7 +29,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value="/home"/>">RezRes</a>
+			<a class="navbar-brand" href="<c:url value="/"/>">RezRes</a>
 			<!-- TODO: Utiliser JSTL pour créer le lien. -->
 		</div>
 

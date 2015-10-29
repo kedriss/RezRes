@@ -14,7 +14,8 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">${body}</h1>
 		<p>
-			Hello you !
+			RezRes est un logiciel de réservation de ressources. 
+			<a href="<c:url value="/login"/>">Connectez-vous</a> pour commencer à l'utiliser !
 		</p>
 	</div>
 </div>
