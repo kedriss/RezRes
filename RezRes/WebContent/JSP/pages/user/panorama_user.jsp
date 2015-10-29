@@ -27,7 +27,7 @@
 				<c:forEach items="${reservations}" var="reser">
 					<tr class="info">
 						<td>${reser.ressource.nom}</td>
-						<td>${reser.utilisateur.nom}${reser.utilisateur.prenom}</td>
+						<td>${reser.utilisateur.login}</td>
 						<td><fmt:formatDate value="${reser.dateDebut}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td><fmt:formatDate value="${reser.dateFin}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
@@ -35,7 +35,7 @@
 								class="form-inline" role="form" method="post">
 								<input value="${reser.id}" type="hidden" name="id">
 								<button type="submit" class="btn btn-default btn-sm">
-									<span class="glyphicon glyphicon-trash"></span>
+									<span class="glyphicon glyphicon-remove"></span>
 								</button>
 							</form>
 						</td>
