@@ -85,31 +85,44 @@ public class ReservationServlet extends UserServlet {
 		String endDate = request.getParameter("endDate");
 		String endTime = request.getParameter("endTime");
 
-		if (startDate == null || startTime == null || endDate == null || endTime == null) {			
+		if (isNullDate(startDate, startTime, endDate, endTime)) {			
 		Messages.InputsEmpty.setMessage(request);	 
 		}
 		else{
 			try {
+				
 				Date startDateTime = dateParser.parse(startDate + " " + startTime);
 				Date endDateTime = dateParser.parse(endDate + " " + endTime);
-								
-				ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
-				ReservationEntity reservation = new ReservationEntity();
-				reservation.setDateDebut(startDateTime);
-				reservation.setDateFin(endDateTime);
-				reservation.setRessource(ressourceMananger.load(idRessource));
-				UtilisateurEntity user = (UtilisateurEntity) session.getAttribute("utilisateurConnecte");
-				reservation.setUtilisateur(user);
-
-				reservationManager.save(reservation);
-
-				request.setAttribute("created", true);
+				if (CheckDateCoherence(startDateTime, endDateTime)){				
+					ReservationPersistenceJPA reservationManager = new ReservationPersistenceJPA();
+					ReservationEntity reservation = new ReservationEntity();
+					reservation.setDateDebut(startDateTime);
+					reservation.setDateFin(endDateTime);
+					reservation.setRessource(ressourceMananger.load(idRessource));
+					UtilisateurEntity user = (UtilisateurEntity) session.getAttribute("utilisateurConnecte");
+					reservation.setUtilisateur(user);
+	
+					reservationManager.save(reservation);
+	
+					request.setAttribute("created", true);
+				}else{
+					Messages.ReservationBadDate.setMessage(request);
+				}
 				
 			} catch (ParseException e) {
 				Messages.BadDateFormat.setMessage(request);
 			}
 		}
 
+	}
+
+	private boolean CheckDateCoherence(Date startDateTime, Date endDateTime) {
+		return startDateTime.before(endDateTime);
+	}
+
+	private boolean isNullDate(String startDate, String startTime,
+			String endDate, String endTime) {
+		return startDate == null || startTime == null || endDate == null || endTime == null;
 	}
 
 	private void deleteAction(HttpServletRequest request, HttpServletResponse response) {
@@ -131,27 +144,35 @@ public class ReservationServlet extends UserServlet {
 		String endTime = request.getParameter("endTime");
 
 		// On arrive sur le formulaire vide
-		if (typeressource == null || startDate == null || startTime == null || endDate == null || endTime == null ) {
+		if (isNullDate(typeressource, startDate, startTime, endDate) || endTime == null ) {
 			setUpForm(request, response);
 		} else {
 			try {
 				Date startDateTime = dateParser.parse(startDate + " " + startTime);
 				Date endDateTime = dateParser.parse(endDate + " " + endTime);
-				Map<String, Object> criters = new HashMap<String, Object>();
-
-				criters.put("type", Integer.valueOf(typeressource));
-				criters.put("date_debut", startDateTime);
-				criters.put("date_fin", endDateTime);
-				RessourcePersistenceJPA ressourceManager = new RessourcePersistenceJPA();
-				List<RessourceEntity> ressourcesLibres = ressourceManager
-						.loadByNamedQuery("RessourceEntity.getFreeRessource", criters);
-
 				request.setAttribute("startDate", startDate);
 				request.setAttribute("startTime", startTime);
 				request.setAttribute("endDate", endDate);
 				request.setAttribute("endTime", endTime);
 				
-				request.setAttribute("ressources", ressourcesLibres);
+				if (CheckDateCoherence(startDateTime, endDateTime)){
+					Map<String, Object> criters = new HashMap<String, Object>();
+					
+					criters.put("type", Integer.valueOf(typeressource));
+					criters.put("date_debut", startDateTime);
+					criters.put("date_fin", endDateTime);
+					RessourcePersistenceJPA ressourceManager = new RessourcePersistenceJPA();
+					List<RessourceEntity> ressourcesLibres = ressourceManager
+							.loadByNamedQuery("RessourceEntity.getFreeRessource", criters);
+	
+					
+					
+					request.setAttribute("ressources", ressourcesLibres);
+				}
+				else {
+					Messages.ReservationBadDate.setMessage(request);
+					setUpForm(request, response);
+				}
 			} catch (ParseException e) {
 				Messages.BadDateFormat.setMessage(request);
 				setUpForm(request, response);

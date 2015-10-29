@@ -25,7 +25,8 @@ public enum Messages {
 		TypeRessourceCreated 			("<strong>OK!</strong> Type ajouté.","success"),
 		TypeRessourceModified			("<strong>OK!</strong> Type modifié.","success"),
 		
-		
+		// RESEVATION
+		ReservationBadDate				("<strong>Refusé!</strong> Les dates ne sont pas cohérentes.","danger"),
 		
 		//GLOBAL
 		InputsEmpty		("Tous les champs doivent être saisies","warning"),

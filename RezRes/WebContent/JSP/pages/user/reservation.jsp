@@ -12,11 +12,12 @@
 <div class="container-fluid">
 	<jsp:include page="/JSP/common/dash.jsp"></jsp:include>
 
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<jsp:include page="/JSP/common/message.jsp"></jsp:include>
 	<c:choose>
 		<c:when test="${formCreate}">
 
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			
 
 
 				<h1>Que souhaitez vous?</h1>
@@ -30,30 +31,28 @@
 					</div>
 					<div class="form-group">
 						<label>Date de début</label> <input type="date"
-							class="form-control" name="startDate" value="" required>
+							class="form-control" name="startDate" value="${startDate}" required>
 					</div>
 					<div class="form-group">
 						<label>Heure de début</label> <input type="time"
-							class="form-control" name="startTime" value="" required>
+							class="form-control" name="startTime" value="${startTime}" required>
 					</div>
 					<div class="form-group">
 						<label>Date de Fin</label> <input type="date" class="form-control"
-							name="endDate" value="" required>
+							name="endDate" value="${endDate}" required>
 					</div>
 					<div class="form-group">
 						<label>Heure de Fin</label> <input type="time"
-							class="form-control" name="endTime" value="" required>
+							class="form-control" name="endTime" value="${endTime}" required>
 					</div>
 					<button type="submit" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-ok"></span>
 					</button>
 				</form>
-			</div>
+		
 		</c:when>
 
 		<c:otherwise>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				
 				<h1>Selectionner la ressource à réserver</h1>
 				<table class="table tact">
 					<thead>
@@ -99,9 +98,10 @@
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</form>
-			</div>
+			
 		</c:otherwise>
 	</c:choose>
+	</div>
 </div>
 
 <jsp:include page="/JSP/common/footer.jsp"></jsp:include>

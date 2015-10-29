@@ -20,6 +20,13 @@
 		<form action="<c:url value="/admin/filter"/>" method="post"
 			role="form">
 			<div class="form-group">
+				<label>Type</label><select name="type" class="form-control">
+					<c:forEach items="${typeRessources}" var="typeRessource">
+						<option value="${typeRessource.cle}">${typeRessource.libelle}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="form-group">
 				<label>Date de début</label> <input type="date" class="form-control"
 					name="startDate" value="" required>
 			</div>

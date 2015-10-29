@@ -73,7 +73,7 @@ public class PanoramaAdmin extends AdminServlet {
 		request.setAttribute("menu_entry", 2);
 
 		String pathInfo = request.getPathInfo();
-
+		System.out.println(pathInfo);
 		if (pathInfo != null) {
 			getRessourcesFromDates(request);
 		} else {
